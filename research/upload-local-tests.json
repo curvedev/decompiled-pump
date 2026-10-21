@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-21T13:29:42.192Z",
+  "runtime": "LiteSVM native upgradeable loader",
+  "passed": true,
+  "checks": 8,
+  "scope": "Bounded loader Write encoding, exact range and payload, authority rejection and rollback",
+  "mainnet_transactions_sent": 0
+}

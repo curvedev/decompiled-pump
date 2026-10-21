@@ -33,7 +33,13 @@ def verify(c):
     b=binary();assert body[45:]==b,'On-chain bytes differ from candidate'
     tested=json.loads((ROOT/'research/mainnet-local-tests.json').read_text());assert tested['passed'] and tested['checks']>=41 and tested['program']==c['program'] and tested['binarySha256']==hashlib.sha256(b).hexdigest()
     report={'date':datetime.datetime.now(datetime.timezone.utc).isoformat(),'network':'mainnet-beta','genesis':GENESIS,'program':c['program'],'programdata':pd,'deployment_slot':struct.unpack_from('<Q',body,4)[0],'finalized_context_slot':snap['context']['slot'],'upgrade_authority':c['upgrade_authority'],'treasury':c['treasury'],'binary_bytes':len(b),'binary_sha256':hashlib.sha256(b).hexdigest(),'exact_byte_match':True,'upgradeable':True,'project_token_created':False}
-    (ROOT/'research/mainnet-deployment.json').write_text(json.dumps(report,indent=2)+'\n');return report
+    destination=ROOT/'research/mainnet-deployment.json'
+    previous=json.loads(destination.read_text()) if destination.exists() else {}
+    if previous.get('deployment_signature') and all(previous.get(k)==report[k] for k in ['program','binary_sha256','deployment_slot']):
+        signature=previous['deployment_signature'];status=rpc(URL,'getSignatureStatuses',[[signature],{'searchTransactionHistory':True}])['value'][0]
+        assert status and status['err'] is None and status['confirmationStatus']=='finalized' and status['slot']==report['deployment_slot'],'Recorded deployment signature does not match finalized deployment'
+        report['deployment_signature']=signature
+    destination.write_text(json.dumps(report,indent=2)+'\n');return report
 def deploy(c,args):
     assert args.execute and args.approval and args.operator_dir,'Deployment requires --execute, approved budget and operator keys'
     approval=json.loads(pathlib.Path(args.approval).read_text());report=preflight(c)
@@ -63,5 +69,36 @@ def deploy(c,args):
     for line in result.stdout.splitlines():
         if line.startswith(('Program Id:','Signature:')):print(line)
     return verify(c)
+def finalize(c,args):
+    """Finalize only a byte-complete, previously funded deployment buffer."""
+    assert args.execute and args.approval and args.operator_dir,'Finalization requires explicit approved execution'
+    approval=json.loads(pathlib.Path(args.approval).read_text());report=preflight(c);b=binary()
+    assert approval.get('approved') is True and approval['max_total_debit_lamports']==1_350_000_000
+    assert approval['binary_sha256']==hashlib.sha256(b).hexdigest()
+    for field in ['program','deployer','upgrade_authority','treasury','recovery']:assert approval[field]==c[field]
+    assert not report['program_exists'],'An existing program requires a separate upgrade review'
+    account=rpc(URL,'getAccountInfo',[c['upload_buffer'],{'encoding':'base64','commitment':'finalized'}])['value']
+    assert account and account['owner']==LOADER,'Named buffer absent or wrong owner'
+    data=base64.b64decode(account['data'][0])
+    assert data[:4]==struct.pack('<I',1) and data[4]==1 and b58(data[5:37])==c['upgrade_authority']
+    assert data[37:]==b,'Buffer must exactly match the approved executable'
+    balance=report['roles_balance_lamports']['deployer']
+    assert balance+account['lamports']<=approval['max_total_debit_lamports'],'Unexpected funding; review cap accounting'
+    assert balance>=report['permanent_program_rent_lamports']+1_000_000,'Remaining balance does not cover bounded finalization'
+    tested=json.loads((ROOT/'research/mainnet-local-tests.json').read_text());assert tested['passed'] and tested['checks']>=42 and tested['binarySha256']==approval['binary_sha256']
+    recovery=subprocess.run(['node','--test','tests/recovery.test.mjs'],cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    assert recovery.returncode==0,'User-required recovery checks failed'
+    operator=pathlib.Path(args.operator_dir).resolve()
+    for role,name in {'program':'program','deployer':'deployer','upgrade_authority':'upgrade-authority','treasury':'treasury','recovery':'recovery','upload_buffer':'deployment-buffer'}.items():
+        assert subprocess.check_output([args.keygen,'pubkey',str(operator/(name+'.json'))],text=True).strip()==c[role],'Wrong scoped signer'
+    command=[args.solana,'program','deploy','--buffer',c['upload_buffer'],'--url',URL,'--commitment','finalized','--keypair',str(operator/'deployer.json'),'--upgrade-authority',str(operator/'upgrade-authority.json'),'--program-id',str(operator/'program.json'),'--max-len',str(len(b)),'--with-compute-unit-price','0','--max-sign-attempts','1','--use-rpc']
+    result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    if result.returncode:
+        fd=os.open(operator/'finalize-diagnostics.log',os.O_WRONLY|os.O_CREAT|os.O_TRUNC,0o600)
+        with os.fdopen(fd,'w') as f:f.write(result.stdout+'\n'+result.stderr)
+        raise SystemExit('Finalization interrupted. Inspect private diagnostics and actual program/buffer state before retrying.')
+    for line in result.stdout.splitlines():
+        if line.startswith(('Program Id:','Signature:')):print(line)
+    return verify(c)
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['preflight','verify','deploy']);p.add_argument('--execute',action='store_true');p.add_argument('--approval');p.add_argument('--operator-dir');p.add_argument('--solana',default='solana');p.add_argument('--keygen',default='solana-keygen');args=p.parse_args();c=config();report={'preflight':lambda:preflight(c),'verify':lambda:verify(c),'deploy':lambda:deploy(c,args)}[args.action]();print(json.dumps(report,indent=2))
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['preflight','verify','deploy','finalize']);p.add_argument('--execute',action='store_true');p.add_argument('--approval');p.add_argument('--operator-dir');p.add_argument('--solana',default='solana');p.add_argument('--keygen',default='solana-keygen');args=p.parse_args();c=config();report={'preflight':lambda:preflight(c),'verify':lambda:verify(c),'deploy':lambda:deploy(c,args),'finalize':lambda:finalize(c,args)}[args.action]();print(json.dumps(report,indent=2))

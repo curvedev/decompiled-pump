@@ -5,10 +5,10 @@ An independent experimental Solana launchpad and a public record of deployed-pro
 ## Current status
 
 - Native Rust program builds to sBPF. Coin creation, curve buys/sells, separate fee claims, explicit graduation, and independent post-graduation swaps are implemented.
-- Six Rust tests, including 10,000 randomized arithmetic cases; eight client/wallet tests; 37 initial validator checks and 41 checks against the corrected program in LiteSVM. Updated verification results are recorded in `research/`.
+- Six Rust tests, including 10,000 randomized arithmetic cases; ten client/wallet/network tests in each network mode; 42 protocol checks against the mainnet artifact in LiteSVM. Seven recovery contract tests, eight native recovery checks and eight native upload checks pass. Updated verification results are recorded in `research/`.
 - Pump, PumpSwap, and Pump Fees executables were captured and hashed. The Pump executable was disassembled with Anza's sBPF tool. Four buys and four sells ran against that captured executable in LiteSVM, with fee observations and failed-slippage rollback checks.
-- [Public devnet launchpad](https://curvedev.github.io/decompiled-pump/) is live. Finalized deployed bytes match the tested artifact. A fictional TEST coin completed nine finalized lifecycle transactions, including graduation and pool swaps. See [status](docs/status.md) and the precise [devnet results](research/devnet-smoke-results.json).
-- Pump.fun-style market-first interface: compact icon navigation, search, grid/table feeds, watchlist, live create preview, and chart/trade panels. Desktop and 390-pixel CSS layouts were browser-checked; actual extension-wallet approvals and physical mobile devices remain unverified. See [interface recreation](docs/interface.md).
+- [Public mainnet launchpad](https://depump.fun/) uses the finalized, byte-verified mainnet program and separately held operator roles. No mainnet coin was launched during deployment. The prior devnet TEST coin completed nine finalized lifecycle transactions. See [mainnet verification](research/mainnet-deployment.json), [status](docs/status.md), and the separate [devnet results](research/devnet-smoke-results.json).
+- User-selected Reverse Engineered Pump interface: classic board, bracket navigation with GitHub links, coin search, watchlist, live create preview, and chart/trade panels. Desktop and 390-pixel CSS layouts were browser-checked; actual extension-wallet approvals and physical mobile devices remain unverified. See [interface recreation](docs/interface.md).
 - REA was explicitly waived. We do not claim recovered original source, a byte-for-byte rebuild, a completed security audit, or complete equivalence.
 
 ## Build and run
@@ -24,7 +24,7 @@ npm run build
 npm run dev
 ```
 
-The default frontend RPC is the free public Solana devnet endpoint. It checks devnet's genesis hash before signing. For a **local-only** preview, set `VITE_RPC_URL=http://127.0.0.1:8899`. Never publish a frontend build configured for a local validator.
+Development builds default to devnet. The published mainnet frontend is built with `DEPUMP_NETWORK=mainnet npm run build` and checks the full mainnet genesis hash before signing. `python3 scripts/build-program.py --network mainnet` produces the separately compiled mainnet executable. For a **local-only** preview, set `VITE_RPC_URL=http://127.0.0.1:8899`. Never publish a frontend build configured for a local validator.
 
 The default esbuild build generates `dist/`, with content-versioned relative asset URLs and source maps disabled. `scripts/package-pages.py` copies the build into `docs/` for GitHub Pages while preserving protocol documentation. No server, database, account login, paid RPC, or upload service is required. Coin thumbnails and metadata are stored on-chain; the browser downsizes and re-encodes images before signing. `npm run dev` builds and serves on loopback port 5187; rebuild and refresh after editing.
 
@@ -62,11 +62,13 @@ For disassembly, build Anza's `sbpf_cli` at the commit recorded in [dispatch-map
 - [Research feasibility and limitations](research/feasibility.md)
 - [Evidence ledger](research/evidence-ledger.json)
 - [Security and validation limits](SECURITY.md)
-- [Devnet deployment](docs/deployment.md)
+- [Deployment and wallet roles](docs/deployment.md)
+- [Mainnet release and costs](docs/mainnet.md)
+- [Local signed operator recovery](docs/operator-recovery.md)
 - [Costs and recovery](docs/costs-and-recovery.md)
 
 MIT covers this repository's original implementation. Third-party dependencies retain their licenses; [notices](THIRD_PARTY_NOTICES.md) distinguish research subjects from our code.
 
-## Mainnet candidate
+## Mainnet release
 
-The user-requested mainnet preparation, fresh public wallet roles, exact candidate hash, current rent quote, limitations and approval gates are recorded in [docs/mainnet.md](docs/mainnet.md). The public site remains devnet until the separately built mainnet program is deployed and verified. No project token is included.
+The finalized mainnet program, separate public wallet roles, exact executable hash, actual costs, local recovery backend and limitations are recorded in [docs/mainnet.md](docs/mainnet.md). The program remains upgradeable and has not received an independent audit. No project token or verification coin was launched.

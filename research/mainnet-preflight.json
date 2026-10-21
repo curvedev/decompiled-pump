@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-21T13:03:14.297466+00:00",
+  "date": "2026-10-21T13:41:33.514326+00:00",
   "network": "mainnet-beta",
   "genesis": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
   "program": "4SBqwENU4drhkJY32ZjpZTtXvhRydVffaxfA3CPR4qgH",
@@ -44,7 +44,7 @@
   "required_operator_liquidity_lamports": 0,
   "roles_balance_lamports": {
     "program": 0,
-    "deployer": 0,
+    "deployer": 710486600,
     "upgrade_authority": 0,
     "treasury": 0,
     "recovery": 0
