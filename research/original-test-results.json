@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-21T08:28:04.944Z",
+  "runtime": "LiteSVM npm 0.8.0 on ARM64",
+  "scope": "Captured original Pump executable, captured Global/FeeConfig, four synthetic legacy-token SOL curves. Not historic transaction replay or full equivalence.",
+  "binarySha256": "7a19affaa2c6187e04a5fe0ea298cee81fa5eb8c24cfcc30d85f615e89f7b02d",
+  "configContextSlot": 459541238,
+  "results": [
+    {
+      "amount": "1",
+      "originalGross": "1",
+      "candidateCeil": "1",
+      "candidateFloorPlusOne": "1",
+      "ceilMatches": true,
+      "floorPlusOneMatches": true,
+      "success": true,
+      "computeUnits": "54240",
+      "creatorFee": "1",
+      "protocolFee": "1",
+      "buybackFee": "0",
+      "rejectedSlippage": true,
+      "slippageError": "TransactionErrorInstructionError { index: 1, error: InstructionErrorCustom { code: 6002 } }",
+      "unchangedAfterFailure": true,
+      "sell": {
+        "amount": "1",
+        "success": true,
+        "originalGross": "0",
+        "candidateFloor": "0",
+        "floorMatches": true,
+        "creatorFee": "0",
+        "protocolFee": "0"
+      }
+    },
+    {
+      "amount": "1000000",
+      "originalGross": "28",
+      "candidateCeil": "28",
+      "candidateFloorPlusOne": "28",
+      "ceilMatches": true,
+      "floorPlusOneMatches": true,
+      "success": true,
+      "computeUnits": "52818",
+      "creatorFee": "1",
+      "protocolFee": "1",
+      "buybackFee": "0",
+      "rejectedSlippage": true,
+      "slippageError": "TransactionErrorInstructionError { index: 1, error: InstructionErrorCustom { code: 6002 } }",
+      "unchangedAfterFailure": true,
+      "sell": {
+        "amount": "500000",
+        "success": true,
+        "originalGross": "13",
+        "candidateFloor": "13",
+        "floorMatches": true,
+        "creatorFee": "1",
+        "protocolFee": "1"
+      }
+    },
+    {
+      "amount": "100000000000000",
+      "originalGross": "3083247688",
+      "candidateCeil": "3083247688",
+      "candidateFloorPlusOne": "3083247688",
+      "ceilMatches": true,
+      "floorPlusOneMatches": true,
+      "success": true,
+      "computeUnits": "47144",
+      "creatorFee": "9249744",
+      "protocolFee": "14645427",
+      "buybackFee": "14645427",
+      "rejectedSlippage": true,
+      "slippageError": "TransactionErrorInstructionError { index: 1, error: InstructionErrorCustom { code: 6002 } }",
+      "unchangedAfterFailure": true,
+      "sell": {
+        "amount": "50000000000000",
+        "success": true,
+        "originalGross": "1616972027",
+        "candidateFloor": "1616972027",
+        "floorMatches": true,
+        "creatorFee": "4850917",
+        "protocolFee": "7680618"
+      }
+    },
+    {
+      "amount": "536500000000000",
+      "originalGross": "30000000001",
+      "candidateCeil": "30000000000",
+      "candidateFloorPlusOne": "30000000001",
+      "ceilMatches": false,
+      "floorPlusOneMatches": true,
+      "success": true,
+      "computeUnits": "51674",
+      "creatorFee": "90000001",
+      "protocolFee": "142500001",
+      "buybackFee": "142500000",
+      "rejectedSlippage": true,
+      "slippageError": "TransactionErrorInstructionError { index: 1, error: InstructionErrorCustom { code: 6002 } }",
+      "unchangedAfterFailure": true,
+      "sell": {
+        "amount": "268250000000000",
+        "success": true,
+        "originalGross": "20000000000",
+        "candidateFloor": "20000000000",
+        "floorMatches": true,
+        "creatorFee": "60000000",
+        "protocolFee": "95000000"
+      }
+    }
+  ]
+}

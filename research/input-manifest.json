@@ -1,0 +1,27 @@
+{
+  "pump_global": {
+    "address": "4wTV1YmiEkRvAtNtsSGPtUrqRYQMe5SKy2uB4Jjaxnjf",
+    "data_sha256": "dd2b9fa23e2e80d35a0f33329db5c7deb3e88d5ed73bceb1ffa397225f437f8b",
+    "data_bytes": 1088,
+    "owner": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+  },
+  "pump_fee_config": {
+    "address": "8Wf5TiAheLUqBrKXeYg2JtAFFMWtKdG2BSFgqUcPVwTt",
+    "data_sha256": "3504fae20640e15bd441257ab118aa96fb4e99190defc06a01aae26b307bf204",
+    "data_bytes": 4097,
+    "owner": "pfeeUxB6jkeY1Hxd7CsFCAjcbHA9rWtchMGdZ6VojVZ"
+  },
+  "observed_global_parameters": {
+    "initial_virtual_token": 1073000000000000,
+    "initial_virtual_SOL": 30000000000,
+    "initial_real_token": 793100000000000,
+    "supply": 1000000000000000,
+    "fallback_platform_bps": 95
+  },
+  "configuration_context_slot": 459541238,
+  "documentation_commit": "639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22",
+  "idl_sha256": {
+    "pump": "7616681ea557975f9f623ac211080f22a93060781eaf4765b0a488d980997207",
+    "pump_fees": "6b9fa3eccc6e06273076a47b581f9fcb9e531bb7c3c88acbcd44db55a4002b29"
+  }
+}

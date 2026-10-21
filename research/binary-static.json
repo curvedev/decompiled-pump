@@ -1,0 +1,562 @@
+[
+  {
+    "name": "pump_fees",
+    "sections": [
+      {
+        "name": "",
+        "offset": 0,
+        "size": 0
+      },
+      {
+        "name": ".text",
+        "offset": 288,
+        "size": 799648
+      },
+      {
+        "name": ".rodata",
+        "offset": 799936,
+        "size": 21079
+      },
+      {
+        "name": ".data.rel.ro",
+        "offset": 821016,
+        "size": 6744
+      },
+      {
+        "name": ".dynamic",
+        "offset": 827760,
+        "size": 176
+      },
+      {
+        "name": ".dynsym",
+        "offset": 827936,
+        "size": 432
+      },
+      {
+        "name": ".dynstr",
+        "offset": 828368,
+        "size": 268
+      },
+      {
+        "name": ".rel.dyn",
+        "offset": 828640,
+        "size": 43968
+      },
+      {
+        "name": ".shstrtab",
+        "offset": 872608,
+        "size": 72
+      }
+    ],
+    "anchors": [
+      {
+        "file_offset": 800224,
+        "text": "Instruction: InitializeFeeConfig"
+      },
+      {
+        "file_offset": 800512,
+        "text": "Instruction: CrankDonationFeePdaFee"
+      },
+      {
+        "file_offset": 800768,
+        "text": "Instruction: ClaimSocialFeePdaV2ProgramError"
+      },
+      {
+        "file_offset": 806780,
+        "text": "Instruction: IdlCreateAccountanchor"
+      },
+      {
+        "file_offset": 806819,
+        "text": "Instruction: IdlResizeAccountdata_len"
+      },
+      {
+        "file_offset": 806902,
+        "text": "Instruction: IdlCloseAccountInstruction"
+      },
+      {
+        "file_offset": 806958,
+        "text": "Instruction: IdlWriteInstruction"
+      },
+      {
+        "file_offset": 807007,
+        "text": "Instruction: IdlSetBufferInstruction"
+      },
+      {
+        "file_offset": 807071,
+        "text": "Instruction: SetSocialClaimAuthorityInstruction"
+      },
+      {
+        "file_offset": 807135,
+        "text": "Instruction: SetClaimRateLimitInstruction"
+      },
+      {
+        "file_offset": 807190,
+        "text": "Instruction: UpdateFeeConfigInstruction"
+      },
+      {
+        "file_offset": 807245,
+        "text": "Instruction: UpdateStableFeeConfigInstruction"
+      },
+      {
+        "file_offset": 807312,
+        "text": "Instruction: ExtendFeeConfigInstruction"
+      },
+      {
+        "file_offset": 807370,
+        "text": "Instruction: UpdateAdminInstruction"
+      },
+      {
+        "file_offset": 807414,
+        "text": "Instruction: GetFeesWithQuoteMintInstruction"
+      },
+      {
+        "file_offset": 807482,
+        "text": "Instruction: RevokeFeeSharingAuthorityInstruction"
+      },
+      {
+        "file_offset": 807560,
+        "text": "Instruction: UpdateFeeSharesInstruction"
+      },
+      {
+        "file_offset": 807618,
+        "text": "Instruction: AdminCtoSharingConfigInstruction"
+      },
+      {
+        "file_offset": 807683,
+        "text": "Instruction: ClaimSocialFeePdaInstruction"
+      },
+      {
+        "file_offset": 807743,
+        "text": "Instruction: SweepBuybackInstruction"
+      },
+      {
+        "file_offset": 807803,
+        "text": "Instruction: UpdateBuybackClaimRateLimitInstruction"
+      },
+      {
+        "file_offset": 807876,
+        "text": "Instruction: Withdrawaccountsol_destinationbufferidltoIdlAccount"
+      },
+      {
+        "file_offset": 804218,
+        "text": "Only Pump and PumpSwap programs can call this instruction"
+      }
+    ]
+  },
+  {
+    "name": "pump",
+    "sections": [
+      {
+        "name": "",
+        "offset": 0,
+        "size": 0
+      },
+      {
+        "name": ".text",
+        "offset": 288,
+        "size": 1792208
+      },
+      {
+        "name": ".rodata",
+        "offset": 1792496,
+        "size": 32031
+      },
+      {
+        "name": ".data.rel.ro",
+        "offset": 1824528,
+        "size": 10352
+      },
+      {
+        "name": ".dynamic",
+        "offset": 1834880,
+        "size": 176
+      },
+      {
+        "name": ".dynsym",
+        "offset": 1835056,
+        "size": 456
+      },
+      {
+        "name": ".dynstr",
+        "offset": 1835512,
+        "size": 288
+      },
+      {
+        "name": ".rel.dyn",
+        "offset": 1835800,
+        "size": 98352
+      },
+      {
+        "name": ".shstrtab",
+        "offset": 1934152,
+        "size": 72
+      }
+    ],
+    "anchors": [
+      {
+        "file_offset": 1792616,
+        "text": "Instruction: CollectCreatorFeeV2"
+      },
+      {
+        "file_offset": 1793064,
+        "text": "Instruction: AddQuoteControlMintBuybackFeeRecipientNotAuthorizedA"
+      },
+      {
+        "file_offset": 1793256,
+        "text": "Instruction: UpdateBuybackConfigAn"
+      },
+      {
+        "file_offset": 1795824,
+        "text": "Instruction: BuyCreateV2Disabled"
+      },
+      {
+        "file_offset": 1800903,
+        "text": "Instruction: IdlCreateAccountInstruction"
+      },
+      {
+        "file_offset": 1801015,
+        "text": "Instruction: IdlCloseAccountInstruction"
+      },
+      {
+        "file_offset": 1801071,
+        "text": "Instruction: IdlWriteInstruction"
+      },
+      {
+        "file_offset": 1801120,
+        "text": "Instruction: IdlSetBufferInstruction"
+      },
+      {
+        "file_offset": 1801168,
+        "text": "Instruction: UpdateGlobalAuthorityInstruction"
+      },
+      {
+        "file_offset": 1801229,
+        "text": "Instruction: ToggleCashbackEnabledInstruction"
+      },
+      {
+        "file_offset": 1801300,
+        "text": "Instruction: SetMaxCurveDepthInstruction"
+      },
+      {
+        "file_offset": 1801358,
+        "text": "Instruction: UpdateCreatorFeeConfigInstruction"
+      },
+      {
+        "file_offset": 1801418,
+        "text": "Instruction: RemoveQuoteMintInstruction"
+      },
+      {
+        "file_offset": 1801482,
+        "text": "Instruction: SetParamsInstruction"
+      },
+      {
+        "file_offset": 1801539,
+        "text": "Instruction: SetReservedFeeRecipientsInstruction"
+      },
+      {
+        "file_offset": 1801595,
+        "text": "Instruction: CreateV2Instruction"
+      },
+      {
+        "file_offset": 1801634,
+        "text": "Instruction: BuyExactQuoteInV2Instruction"
+      },
+      {
+        "file_offset": 1801683,
+        "text": "Instruction: BuyV3Instruction"
+      },
+      {
+        "file_offset": 1801731,
+        "text": "Instruction: SellV3Instruction"
+      },
+      {
+        "file_offset": 1801780,
+        "text": "Instruction: SweepProtocolFeeInstruction"
+      },
+      {
+        "file_offset": 1801837,
+        "text": "Instruction: BuyExactSolInInstruction"
+      },
+      {
+        "file_offset": 1801880,
+        "text": "Instruction: MigrateInstruction"
+      },
+      {
+        "file_offset": 1801922,
+        "text": "Instruction: ExtendAccountInstruction"
+      },
+      {
+        "file_offset": 1801978,
+        "text": "Instruction: DistributeFeeToHoldersInstruction"
+      },
+      {
+        "file_offset": 1802044,
+        "text": "Instruction: SetCreatorInstruction"
+      },
+      {
+        "file_offset": 1802088,
+        "text": "Instruction: AdminUpdateTokenIncentivesInstruction"
+      },
+      {
+        "file_offset": 1802160,
+        "text": "Instruction: ClaimCashbackInstruction"
+      },
+      {
+        "file_offset": 1802214,
+        "text": "Instruction: InitUserVolumeAccumulatorInstruction"
+      },
+      {
+        "file_offset": 1802291,
+        "text": "Instruction: SyncUserVolumeAccumulatorInstruction"
+      },
+      {
+        "file_offset": 1802362,
+        "text": "Instruction: MigrateBondingCurveCreatorInstruction"
+      },
+      {
+        "file_offset": 1802440,
+        "text": "Instruction: DistributeCreatorFeesInstruction"
+      },
+      {
+        "file_offset": 1802510,
+        "text": "Instruction: InitializeQuoteControlInstruction"
+      },
+      {
+        "file_offset": 1802578,
+        "text": "Instruction: RemoveQuoteControlMintInstruction"
+      },
+      {
+        "file_offset": 1802654,
+        "text": "Instruction: SetQuoteControlMintReservesNotAuthorizedAlreadyInitializedTooMuchSolRequiredTooLittleSolReceivedMintDoesNotMatchBondingCurveBondingCurveCompleteBondingCurveNotCompleteNotInitializedWithdrawTooFrequentNewSizeShouldBeGreaterThanCurrentSizeAccountTypeNotSupportedInitialRealTokenReservesShouldBeLessThanTokenTotalSupplyInitialVirtualTokenReservesShouldBeGreaterThanInitialRealTokenReservesAllZerosWithdrawAuthorityPoolMigrationFeeShouldBeLessThanFinalRealSolReservesPoolMigrationFeeShouldBeGreaterThanCreatorFeePlusMaxMigrateFeesDisabledMigrateInvalidCreatorBuyZeroAmountNotEnoughTokensToBuySellZeroAmountNotEnoughTokensToSellTruncationDivisionByZeroNotEnoughRemainingAccountsAllFeeRecipientsShouldBeNonZeroUnsortedNotUniqueFeeRecipientsCreatorShouldNotBeZeroStartTimeInThePastEndTimeBeforeStartTimeTimeRangeTooLargeEndTimeBeforeCurrentDaySupplyUpdateForFinishedRangeDayIndexAfterEndIndexInvalidIncentiveMintBuyNotEnoughSolToCoverRentBuyNotEnoughSolToCoverFeesBuySlippageBelowMinTokensOutNameTooLongSymbolTooLongUriTooLongCpitializeMayhemFailedMayhemModeDisabledCreatorMigratedToSharingConfigUnableToDistributeCreatorVaultMigratedToSharingConfigSharingConfigNotActiveUnableToDistributeCreatorFeesToExecutableRecipientBondingCurveAndSharingConfigCreatorMismatchShareholdersAndRemainingAccountsMismatchInvalidShareBpsCashbackNotEnabledAllBuybackFeeRecipientsShouldBeNonZeroNotUniqueBuybackFeeRecipientsBuybackBasisPointsOutOfRangeWrongBuybackFeeRecipientsCountBuybackFeeRecipientMissingUnsupportedQuoteMintInvalidQuoteTokenProgramInvalidAssociatedQuoteBondingCurveQuoteMintWhitelistFullQuoteMintAlreadyWhitelistedQuoteMintNotWhitelistedUnableToDistributeCreatorFeesToUninitializedAccountMayhemModeQuoteMintNotAllowedMissingCashbackAccountsInvalidCashbackAccumulatorInvalidBondingCurveV2InvalidQuoteControlInvalidCashbackRecipientCreatorFeeNotConfigurableCreatorFeeBpsOutOfRangeCreatorFeeNotEditableCreatorFeeNotAllowedForCashbackCoinBondingCurveAlreadyMigratedCashbackDeprecatedHolderRewardCreatorImmutableHolderRewardDisabledHolderRewardRecipientsMismatchHolderRewardsRentFloorHolderRewardTokenAccountMissingCtoNotAllowedForMayhemCoinCtoNewCreatorRequiredCtoNewCreatorNotAllowedCreatorFeeNotConfigurableForQuoteCtoCreatorAccountNotWritableCtoSharedVaultFrozenCashbackCoinNotSupportedCreatorFeesNotSweptFeeTiersEmptyFeeConfigTooShortMultiHopDiscontinuousPathInvalidQuoteBondingCurveQuoteBondingCurveNotEligibleQuotePoolAccountsRequiredQuotePoolNotFoundQuoteReservesOutOfRangeCurveDepthExceededMultiHopHopFeesMismatchQuoteCurveAwaitingMigrationMultiHopMayhemCurveNotSupportedQuoteChainAccountsRequiredQuoteMintNotWritableThe"
+      },
+      {
+        "file_offset": 1796059,
+        "text": "programs/pump/src/admin_set_idl_authority.rs__event_authorityanchor:idlprograms/pump/src/buy.rs"
+      },
+      {
+        "file_offset": 1796167,
+        "text": "programs/pump/src/buy_v2.rsbuybuy_exact_quote_inprograms/pump/src/create_v2.rs"
+      },
+      {
+        "file_offset": 1796300,
+        "text": "programs/pump/src/creator/admin_cto.rs"
+      },
+      {
+        "file_offset": 1796567,
+        "text": "programs/pump/src/creator/collect_creator_fee.rs"
+      },
+      {
+        "file_offset": 1796760,
+        "text": "programs/pump/src/creator/distribute_creator_fee_v2.rs"
+      },
+      {
+        "file_offset": 1797111,
+        "text": "programs/pump/src/creator/distribute_creator_fees.rsprograms/pump/src/creator/distribute_fee_to_holders.rsprograms/pump/src/creator/migrate_bonding_curve_creator.rsprograms/pump/src/creator/set_creator.rs"
+      },
+      {
+        "file_offset": 1797377,
+        "text": "programs/pump/src/creator/set_metaplex_creator.rs"
+      },
+      {
+        "file_offset": 1797492,
+        "text": "programs/pump/src/extend_account.rsprograms/pump/src/fee_recipient.rsfee_recipients[]programs/pump/src/migrate.rs"
+      },
+      {
+        "file_offset": 1797760,
+        "text": "programs/pump/src/migrate_v2.rsprograms/pump/src/multi_hop_curve_swap.rsmulti_hop_swapprograms/pump/src/pump_quote.rsprograms/pump/src/quote_control/state.rsprograms/pump/src/quote_control/update_quote_control_mints.rsprograms/pump/src/sell.rsuser_volume_accumulatorprograms/pump/src/sell_v2.rsprograms/pump/src/set_reserved_fee_recipients.rsreserved_fee_recipients[programs/pump/src/sweep_fees.rs"
+      },
+      {
+        "file_offset": 1798244,
+        "text": "programs/pump/src/token_incentives/claim_token_incentives.rs"
+      },
+      {
+        "file_offset": 1798378,
+        "text": "programs/pump/src/token_incentives/volume_accumulator.rs"
+      },
+      {
+        "file_offset": 1798715,
+        "text": "programs/pump/src/trade_v3.rsprograms/pump/src/util/constant_product.rsprograms/pump/src/util/fee.rsprograms/pump/src/util/transfer_fee.rsprograms/pump/src/lib.rs"
+      },
+      {
+        "file_offset": 1800360,
+        "text": "programs/pump/src/quote_control/initialize_quote_control.rsquote_controlQuoteControlrecipientassociated_quote_recipientglobal_incentive_token_accountprograms/pump/src/token_incentives/init_user_volume_accumulator.rs"
+      },
+      {
+        "file_offset": 1803627,
+        "text": "SlippageBelowMinTokensOutNameTooLongSymbolTooLongUriTooLongCpitializeMayhemFailedMayhemModeDisabledCreatorMigratedToSharingConfigUnableToDistributeCreatorVaultMigratedToSharingConfigSharingConfigNotActiveUnableToDistributeCreatorFeesToExecutableRecipientBondingCurveAndSharingConfigCreatorMismatchShareholdersAndRemainingAccountsMismatchInvalidShareBpsCashbackNotEnabledAllBuybackFeeRecipientsShouldBeNonZeroNotUniqueBuybackFeeRecipientsBuybackBasisPointsOutOfRangeWrongBuybackFeeRecipientsCountBuybackFeeRecipientMissingUnsupportedQuoteMintInvalidQuoteTokenProgramInvalidAssociatedQuoteBondingCurveQuoteMintWhitelistFullQuoteMintAlreadyWhitelistedQuoteMintNotWhitelistedUnableToDistributeCreatorFeesToUninitializedAccountMayhemModeQuoteMintNotAllowedMissingCashbackAccountsInvalidCashbackAccumulatorInvalidBondingCurveV2InvalidQuoteControlInvalidCashbackRecipientCreatorFeeNotConfigurableCreatorFeeBpsOutOfRangeCreatorFeeNotEditableCreatorFeeNotAllowedForCashbackCoinBondingCurveAlreadyMigratedCashbackDeprecatedHolderRewardCreatorImmutableHolderRewardDisabledHolderRewardRecipientsMismatchHolderRewardsRentFloorHolderRewardTokenAccountMissingCtoNotAllowedForMayhemCoinCtoNewCreatorRequiredCtoNewCreatorNotAllowedCreatorFeeNotConfigurableForQuoteCtoCreatorAccountNotWritableCtoSharedVaultFrozenCashbackCoinNotSupportedCreatorFeesNotSweptFeeTiersEmptyFeeConfigTooShortMultiHopDiscontinuousPathInvalidQuoteBondingCurveQuoteBondingCurveNotEligibleQuotePoolAccountsRequiredQuotePoolNotFoundQuoteReservesOutOfRangeCurveDepthExceededMultiHopHopFeesMismatchQuoteCurveAwaitingMigrationMultiHopMayhemCurveNotSupportedQuoteChainAccountsRequiredQuoteMintNotWritableThe"
+      },
+      {
+        "file_offset": 1806474,
+        "text": "Slippage:"
+      },
+      {
+        "file_offset": 1803235,
+        "text": "NotEnoughTokensToBuy"
+      },
+      {
+        "file_offset": 1795696,
+        "text": "Division by zero"
+      }
+    ]
+  },
+  {
+    "name": "pump_amm",
+    "sections": [
+      {
+        "name": "",
+        "offset": 0,
+        "size": 0
+      },
+      {
+        "name": ".text",
+        "offset": 288,
+        "size": 1162040
+      },
+      {
+        "name": ".rodata",
+        "offset": 1162328,
+        "size": 25715
+      },
+      {
+        "name": ".data.rel.ro",
+        "offset": 1188048,
+        "size": 8584
+      },
+      {
+        "name": ".dynamic",
+        "offset": 1196632,
+        "size": 176
+      },
+      {
+        "name": ".dynsym",
+        "offset": 1196808,
+        "size": 408
+      },
+      {
+        "name": ".dynstr",
+        "offset": 1197216,
+        "size": 255
+      },
+      {
+        "name": ".rel.dyn",
+        "offset": 1197472,
+        "size": 70384
+      },
+      {
+        "name": ".shstrtab",
+        "offset": 1267856,
+        "size": 72
+      }
+    ],
+    "anchors": [
+      {
+        "file_offset": 1162960,
+        "text": "Instruction: UpdateBuybackConfigAn"
+      },
+      {
+        "file_offset": 1165944,
+        "text": "Instruction: Buy"
+      },
+      {
+        "file_offset": 1173020,
+        "text": "Instruction: IdlCreateAccountanchor"
+      },
+      {
+        "file_offset": 1173059,
+        "text": "Instruction: IdlResizeAccountdata_len"
+      },
+      {
+        "file_offset": 1173142,
+        "text": "Instruction: IdlCloseAccountInstruction"
+      },
+      {
+        "file_offset": 1173198,
+        "text": "Instruction: IdlWriteInstruction"
+      },
+      {
+        "file_offset": 1173247,
+        "text": "Instruction: IdlSetBufferInstruction"
+      },
+      {
+        "file_offset": 1173297,
+        "text": "Instruction: DisableInstruction"
+      },
+      {
+        "file_offset": 1173341,
+        "text": "Instruction: UpdateFeeConfigInstruction"
+      },
+      {
+        "file_offset": 1173404,
+        "text": "Instruction: CreatePoolInstruction"
+      },
+      {
+        "file_offset": 1173449,
+        "text": "Instruction: SetBoostAuthorityInstruction"
+      },
+      {
+        "file_offset": 1173507,
+        "text": "Instruction: SetReservedFeeRecipientsInstruction"
+      },
+      {
+        "file_offset": 1173564,
+        "text": "Instruction: WithdrawInstruction"
+      },
+      {
+        "file_offset": 1173624,
+        "text": "Instruction: ClaimTokenIncentivesInstruction"
+      },
+      {
+        "file_offset": 1173695,
+        "text": "Instruction: CloseUserVolumeAccumulatorInstruction"
+      },
+      {
+        "file_offset": 1173772,
+        "text": "Instruction: BuyExactQuoteInInstruction"
+      },
+      {
+        "file_offset": 1173817,
+        "text": "Instruction: BuyV2Instruction"
+      },
+      {
+        "file_offset": 1173865,
+        "text": "Instruction: SellV2Instruction"
+      },
+      {
+        "file_offset": 1173909,
+        "text": "Instruction: SweepProtocolFeeInstruction"
+      },
+      {
+        "file_offset": 1173966,
+        "text": "Instruction: ExtendAccountInstruction"
+      },
+      {
+        "file_offset": 1174026,
+        "text": "Instruction: SetCoinCreatorInstruction"
+      },
+      {
+        "file_offset": 1174078,
+        "text": "Instruction: ToggleMayhemModeInstruction"
+      },
+      {
+        "file_offset": 1174131,
+        "text": "Instruction: TransferCreatorFeesToPumpInstruction"
+      },
+      {
+        "file_offset": 1174209,
+        "text": "Instruction: MigratePoolCoinCreatorInstruction"
+      },
+      {
+        "file_offset": 1174278,
+        "text": "Instruction: ClaimCashbacksol_destinationbufferidltoIdlAccount"
+      },
+      {
+        "file_offset": 1162739,
+        "text": "SlippageBelowMinBaseAmountOutBuybackFeeRecipientNotAuthorizedA"
+      },
+      {
+        "file_offset": 1165840,
+        "text": "SlippageDisabledWithdrawhost"
+      }
+    ]
+  }
+]

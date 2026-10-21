@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-21T08:28:04.350Z",
+  "network": "LiteSVM synthetic local bank",
+  "program": "8pCWBPUbkivA94J2dLC4rzJmx7kHGrV3qD378DkhAM71",
+  "binarySha256": "34b6786bfa62543ec9ed27c1ae717c09866344521f9c08394ca735bebdd16956",
+  "checks": 41,
+  "passed": true,
+  "limits": [
+    "No browser wallet approval exercised",
+    "Not a security audit",
+    "Random runtime keys excluded from source"
+  ]
+}

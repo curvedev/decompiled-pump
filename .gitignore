@@ -1,0 +1,13 @@
+target/
+node_modules/
+dist/
+.operator/
+.env*
+!.env.example
+*.keypair.json
+test-ledger/
+research/raw/
+.DS_Store
+.openai/
+__pycache__/
+*.pyc

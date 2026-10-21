@@ -1,0 +1,30 @@
+{
+  "name": "decompiled-pump",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && python3 -m http.server 5187 --bind 127.0.0.1 --directory dist",
+    "build": "tsc --noEmit && node scripts/build-web.mjs",
+    "test:client": "node --import tsx --test tests/*.test.ts",
+    "test:chain": "node --import tsx tests/chain.ts",
+    "test:original": "node --import tsx tests/original-lite.ts",
+    "test:original:lite": "node --import tsx tests/original-lite.ts",
+    "test:chain:lite": "CHAIN_RUNTIME=lite node --import tsx tests/chain.ts"
+  },
+  "dependencies": {
+    "@solana/web3.js": "1.98.4",
+    "@solana/spl-token": "0.4.15",
+    "@wallet-standard/app": "1.1.1",
+    "buffer": "6.0.3"
+  },
+  "devDependencies": {
+    "@coral-xyz/anchor": "0.32.1",
+    "@types/node": "24.10.1",
+    "typescript": "5.9.3",
+    "tsx": "4.20.6",
+    "litesvm": "0.8.0",
+    "esbuild": "0.25.11"
+  }
+}

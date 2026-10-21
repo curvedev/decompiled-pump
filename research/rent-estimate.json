@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-21T08:28:04.957749+00:00",
+  "network": "mainnet-beta",
+  "binary_bytes": 125416,
+  "binary_sha256": "34b6786bfa62543ec9ed27c1ae717c09866344521f9c08394ca735bebdd16956",
+  "rent_lamports": {
+    "mint": {
+      "bytes": 82,
+      "lamports": 1066800
+    },
+    "vault": {
+      "bytes": 165,
+      "lamports": 1488440
+    },
+    "coin": {
+      "bytes": 204,
+      "lamports": 1686560
+    },
+    "metadata_max": {
+      "bytes": 4096,
+      "lamports": 21457920
+    },
+    "program": {
+      "bytes": 36,
+      "lamports": 833120
+    },
+    "programdata": {
+      "bytes": 125461,
+      "lamports": 637992120
+    },
+    "upload_buffer": {
+      "bytes": 125453,
+      "lamports": 637951480
+    }
+  },
+  "estimates": {
+    "permanent_program_rent_lamports": 638825240,
+    "peak_program_and_buffer_rent_lamports": 1276776720,
+    "upload_base_fees_lamports": 750000,
+    "base_fee_assumption_lamports_per_signature": 5000,
+    "priority_fee_assumption_lamports": 0,
+    "new_coin_max_metadata_account_rent_lamports": 25699720,
+    "optional_user_token_account_rent_lamports": 1488440
+  }
+}

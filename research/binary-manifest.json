@@ -1,0 +1,51 @@
+{
+  "cluster": "mainnet-beta",
+  "commitment": "finalized",
+  "programs": [
+    {
+      "name": "pump",
+      "program": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
+      "programdata": "B5MvUwXdiW1NMM6QFFD3ssPKBujD4zMohncbM73Z2BQu",
+      "research_time_utc": "2026-10-21T06:58:50.035458+00:00",
+      "finalized_context_slot": 459537531,
+      "deployment_slot": 458921440,
+      "programdata_sha256": "0b692730f9707139fd86d1c1e3a7d63a3f7cb0702278975fa99df90883aab508",
+      "executable_sha256": "7a19affaa2c6187e04a5fe0ea298cee81fa5eb8c24cfcc30d85f615e89f7b02d",
+      "executable_bytes": 10485715,
+      "upgrade_authority": "7gZufwwAo17y5kg8FMyJy2phgpvv9RSdzWtdXiWHjFr8",
+      "elf_machine": 263,
+      "elf_flags": 0,
+      "hash_scope": "all ProgramData bytes after the 45-byte loader metadata, including padding"
+    },
+    {
+      "name": "pump_amm",
+      "program": "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
+      "programdata": "6naEzKeUuFh1Jeeu51NXQgr5qkXgXtc9WKNct4xynVJc",
+      "research_time_utc": "2026-10-21T06:58:57.920993+00:00",
+      "finalized_context_slot": 459537550,
+      "deployment_slot": 458921517,
+      "programdata_sha256": "e3d3be2256841163ba89b6184c2cc90ca1700c820bf887e5bb58b0aa668f5840",
+      "executable_sha256": "6a7ad34596d83b4c435b32f458a56e718e9f82eb4ad38e4316616d15d24d8ff7",
+      "executable_bytes": 10485715,
+      "upgrade_authority": "7gZufwwAo17y5kg8FMyJy2phgpvv9RSdzWtdXiWHjFr8",
+      "elf_machine": 263,
+      "elf_flags": 0,
+      "hash_scope": "all ProgramData bytes after the 45-byte loader metadata, including padding"
+    },
+    {
+      "name": "pump_fees",
+      "program": "pfeeUxB6jkeY1Hxd7CsFCAjcbHA9rWtchMGdZ6VojVZ",
+      "programdata": "75Uu23mqWBb8LM8vDppqC1mQAnCcBuLXhVaDezVMQLRw",
+      "research_time_utc": "2026-10-21T06:59:00.542508+00:00",
+      "finalized_context_slot": 459537587,
+      "deployment_slot": 456132171,
+      "programdata_sha256": "3cf9ee9a380c0ced31171802d402551910ceb8c4819ede4ef44aaf63a12dbfac",
+      "executable_sha256": "4f2955d0f6b40cc9ff7daa18ccad7d19119ba1249759f4e7e3bb691beee6b35e",
+      "executable_bytes": 948944,
+      "upgrade_authority": "7gZufwwAo17y5kg8FMyJy2phgpvv9RSdzWtdXiWHjFr8",
+      "elf_machine": 263,
+      "elf_flags": 0,
+      "hash_scope": "all ProgramData bytes after the 45-byte loader metadata, including padding"
+    }
+  ]
+}

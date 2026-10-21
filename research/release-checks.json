@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-21T08:31:34.458022+00:00",
+  "protocol_checks": 41,
+  "protocol_checks_passed": true,
+  "rust_tests": 6,
+  "client_wallet_tests": 8,
+  "original_binary_buy_cases": 4,
+  "original_binary_sell_cases": 4,
+  "original_slippage_rollback_cases": 4,
+  "binary_sha256": "34b6786bfa62543ec9ed27c1ae717c09866344521f9c08394ca735bebdd16956",
+  "binary_bytes": 125416,
+  "binary_home_path_check": "passed",
+  "source_maps": "disabled",
+  "public_source_push": "pending curvedev isolated CLI authorization",
+  "devnet_deployment": "pending free test SOL",
+  "visual_browser_QA": "not completed; browser-control timeouts",
+  "privacy_staged_check": "passed before initial commit",
+  "privacy_message_check": "passed before initial commit",
+  "privacy_history_archive_check": "recorded after commit in the packaged release-manifest.json",
+  "static_HTTP_asset": "200 response verified"
+}

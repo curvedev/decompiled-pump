@@ -1,0 +1,179 @@
+{
+  "date": "2026-10-21",
+  "project": "Decompiled Pump",
+  "evidence": [
+    {
+      "id": "E01",
+      "class": "official-source",
+      "conclusion": "Official Pump, PumpSwap and fee program IDs",
+      "instruction_or_function": "idl/pump.json; idl/pump_amm.json; idl/pump_fees.json",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/idl/pump.json",
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/idl/pump_amm.json",
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/idl/pump_fees.json"
+      ],
+      "artifacts_and_tests": "research/binary-manifest.json",
+      "limitations": "Public source IDs plus RPC ownership/executable checks; not a deployment-history audit"
+    },
+    {
+      "id": "E02",
+      "class": "binary-observation",
+      "conclusion": "Pinned deployed bytes, slots and hashes",
+      "instruction_or_function": "Upgradeable loader Program and ProgramData",
+      "sources": [
+        "https://solana.com/docs/programs/deploying"
+      ],
+      "artifacts_and_tests": "scripts/capture_program.py",
+      "limitations": "Finalized account reads; executable hash includes padding; captures not atomic across all three programs"
+    },
+    {
+      "id": "E03",
+      "class": "binary-observation",
+      "conclusion": "Pump disassembled; 56 discriminator constants match the IDL",
+      "instruction_or_function": "Anza-generated function_145095 dispatcher and other labels",
+      "sources": [
+        "https://github.com/anza-xyz/sbpf"
+      ],
+      "artifacts_and_tests": "research/dispatch-map.json; research/binary-static.json",
+      "limitations": "Generated labels and constants do not establish full handler semantics or recovered source"
+    },
+    {
+      "id": "E04",
+      "class": "account-observation",
+      "conclusion": "Captured Global reserve/supply parameters",
+      "instruction_or_function": "Global initial reserve fields",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/PUMP_PROGRAM_README.md"
+      ],
+      "artifacts_and_tests": "research/input-manifest.json",
+      "limitations": "Configuration is mutable and separate from executable version; fallback fees do not represent every active tier"
+    },
+    {
+      "id": "E05",
+      "class": "original-execution",
+      "conclusion": "Buy gross quote uses floor division plus one in tested cases",
+      "instruction_or_function": "buy_v3",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/instructions/TRADE_V3.md"
+      ],
+      "artifacts_and_tests": "tests/original-lite.ts; research/original-test-results.json",
+      "limitations": "Four synthetic legacy-SPL SOL curves; exact-divisibility case distinguishes ceiling-only formula; not all quote modes"
+    },
+    {
+      "id": "E06",
+      "class": "original-execution",
+      "conclusion": "Sell gross quote matches floor division in four tested cases",
+      "instruction_or_function": "sell_v3",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/instructions/TRADE_V3.md"
+      ],
+      "artifacts_and_tests": "tests/original-lite.ts; research/original-test-results.json",
+      "limitations": "Includes one zero-output dust sell accepted by original; finite samples"
+    },
+    {
+      "id": "E07",
+      "class": "original-execution",
+      "conclusion": "Zero max-cost buys reject with code 6002 without reserve change",
+      "instruction_or_function": "buy_v3 max_sol_cost",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/instructions/TRADE_V3.md"
+      ],
+      "artifacts_and_tests": "tests/original-lite.ts; research/original-test-results.json",
+      "limitations": "Four zero-limit failures; does not establish all slippage and synthetic-migration cases"
+    },
+    {
+      "id": "E08",
+      "class": "original-execution-plus-inference",
+      "conclusion": "Creator/protocol/buyback fee deltas observed; non-dust samples consistent with 30/95 bps at the tested tier",
+      "instruction_or_function": "buy_v3; sell_v3; BondingCurve creator_fee/protocol_fees",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/FEE_PROGRAM_README.md",
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/instructions/SWEEP_FEES.md"
+      ],
+      "artifacts_and_tests": "research/original-test-results.json",
+      "limitations": "Only those active samples; no claim that fees are globally fixed or all tier transitions validated"
+    },
+    {
+      "id": "E09",
+      "class": "official-source-not-runtime-validated",
+      "conclusion": "Coin creation metadata/initialization and current optional modes",
+      "instruction_or_function": "create; create_v2",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/instructions/COIN_CREATION.md"
+      ],
+      "artifacts_and_tests": "research/dispatch-map.json",
+      "limitations": "Original creation was not executed here; instruction presence is not full creation-path analysis"
+    },
+    {
+      "id": "E10",
+      "class": "official-source-not-runtime-validated",
+      "conclusion": "Creator claims and configurable administrator permissions",
+      "instruction_or_function": "collect_creator_fee; collect_creator_fee_v2; set_params; update_global_authority",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/PUMP_CREATOR_FEE_README.md",
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/PUMP_PROGRAM_README.md",
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/instructions/COLLECT_CREATOR_FEE.md"
+      ],
+      "artifacts_and_tests": "research/dispatch-map.json",
+      "limitations": "No original claims/admin authorization runtime comparison; our simpler signers/fees differ deliberately"
+    },
+    {
+      "id": "E11",
+      "class": "official-source-not-runtime-validated",
+      "conclusion": "Curve completion, migration to PumpSwap and post-graduation AMM",
+      "instruction_or_function": "migrate; PumpSwap buy/sell",
+      "sources": [
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/PUMP_PROGRAM_README.md",
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/PUMP_SWAP_README.md",
+        "https://github.com/pump-fun/pump-public-docs/blob/639b87fb45c3adeffa6f7c4a1bf0cb85e392bf22/docs/SYNTHETIC_MIGRATION.md"
+      ],
+      "artifacts_and_tests": "research/binary-manifest.json; research/binary-static.json",
+      "limitations": "PumpSwap captured; original graduation, liquidity migration and synthetic crossing not executed or equivalence-tested"
+    },
+    {
+      "id": "E12",
+      "class": "independent-reconstruction-tested",
+      "conclusion": "Own fixed-supply creation, metadata sealing, buys/sells, transparent fees and claims",
+      "instruction_or_function": "depump process_instruction Create/Seal/Buy/Sell/ClaimCreator/ClaimPlatform",
+      "sources": [],
+      "artifacts_and_tests": "tests/chain.ts; research/chain-test-results.json",
+      "limitations": "41 local LiteSVM checks; original protocol used a separate executable; real wallet approvals still unverified"
+    },
+    {
+      "id": "E13",
+      "class": "independent-reconstruction-tested",
+      "conclusion": "Explicit graduation and independent pool trades with locked founding liquidity",
+      "instruction_or_function": "depump Graduate and phase=1 Buy/Sell",
+      "sources": [],
+      "artifacts_and_tests": "tests/chain.ts; docs/protocol.md",
+      "limitations": "No LP withdrawal path in current code; upgrade authority can alter code; not PumpSwap equivalence"
+    },
+    {
+      "id": "E14",
+      "class": "independent-reconstruction-tested",
+      "conclusion": "Checked arithmetic, price rounding, curve round-trip behavior and product conservation",
+      "instruction_or_function": "math::curve_buy_cost; math::sell_gross; math::fees",
+      "sources": [],
+      "artifacts_and_tests": "programs/depump/src/math.rs; tests/client.test.ts",
+      "limitations": "10,000 deterministic random samples plus finite edges are not a proof of all protocol invariants"
+    },
+    {
+      "id": "E15",
+      "class": "client-contract-tests",
+      "conclusion": "Wallet batch integrity and bounded retry behavior",
+      "instruction_or_function": "wallet sign; confirmSigned",
+      "sources": [],
+      "artifacts_and_tests": "tests/wallet.test.ts",
+      "limitations": "Mock Wallet Standard signers, not actual extension UI"
+    },
+    {
+      "id": "E16",
+      "class": "not-used",
+      "conclusion": "REA contribution",
+      "instruction_or_function": "None",
+      "sources": [],
+      "artifacts_and_tests": "research/feasibility.md",
+      "limitations": "Requester explicitly waived REA; zero REA analysis claimed"
+    }
+  ]
+}

@@ -1,0 +1,343 @@
+{
+  "tool": "Anza solana-sbpf CLI 0.25.0",
+  "source_commit": "513d83cabe6579e365bae71115a35b7f415249ce",
+  "interpretation": "64-bit constants matching IDL discriminators. Generated labels are not recovered source function names. Presence is not proof of execution.",
+  "matches": [
+    {
+      "instruction": "initialize",
+      "generated_label": "function_145095",
+      "disassembly_line": 150418,
+      "constant": "ed9b980d1f6dafaf"
+    },
+    {
+      "instruction": "update_global_authority",
+      "generated_label": "function_145095",
+      "disassembly_line": 150421,
+      "constant": "d56115d0c44ab5e3"
+    },
+    {
+      "instruction": "toggle_create_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150426,
+      "constant": "abcb6bacf0e6ff1c"
+    },
+    {
+      "instruction": "toggle_cashback_enabled",
+      "generated_label": "function_145095",
+      "disassembly_line": 150429,
+      "constant": "c35659bdffe06773"
+    },
+    {
+      "instruction": "update_holder_reward_config",
+      "generated_label": "function_145095",
+      "disassembly_line": 150432,
+      "constant": "10ec23c70442fce1"
+    },
+    {
+      "instruction": "set_max_curve_depth",
+      "generated_label": "function_145095",
+      "disassembly_line": 150435,
+      "constant": "a5da6c8edb989a20"
+    },
+    {
+      "instruction": "toggle_mayhem_mode",
+      "generated_label": "function_145095",
+      "disassembly_line": 150438,
+      "constant": "a3ff1f64d06f0901"
+    },
+    {
+      "instruction": "update_creator_fee_config",
+      "generated_label": "function_145095",
+      "disassembly_line": 150441,
+      "constant": "af884242f9a0af3d"
+    },
+    {
+      "instruction": "add_quote_mint",
+      "generated_label": "function_145095",
+      "disassembly_line": 150444,
+      "constant": "d15e18283815796f"
+    },
+    {
+      "instruction": "remove_quote_mint",
+      "generated_label": "function_145095",
+      "disassembly_line": 150447,
+      "constant": "9b9ed15826df41b1"
+    },
+    {
+      "instruction": "set_virtual_quote_reserves",
+      "generated_label": "function_145095",
+      "disassembly_line": 150450,
+      "constant": "6014580968bf8765"
+    },
+    {
+      "instruction": "set_params",
+      "generated_label": "function_145095",
+      "disassembly_line": 150453,
+      "constant": "8dbb029334b2ea1b"
+    },
+    {
+      "instruction": "set_mayhem_virtual_params",
+      "generated_label": "function_145095",
+      "disassembly_line": 150456,
+      "constant": "612a9599bfbca93d"
+    },
+    {
+      "instruction": "set_reserved_fee_recipients",
+      "generated_label": "function_145095",
+      "disassembly_line": 150459,
+      "constant": "8ed55972e8a2ac6f"
+    },
+    {
+      "instruction": "create",
+      "generated_label": "function_145095",
+      "disassembly_line": 150462,
+      "constant": "77071c0528c81e18"
+    },
+    {
+      "instruction": "create_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150465,
+      "constant": "b4318b5fec4c90d6"
+    },
+    {
+      "instruction": "buy_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150468,
+      "constant": "3dd3c56761ee17b8"
+    },
+    {
+      "instruction": "buy_exact_quote_in_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150471,
+      "constant": "2f5b4d68461cabc2"
+    },
+    {
+      "instruction": "sell_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150474,
+      "constant": "b240e9e73c82f65d"
+    },
+    {
+      "instruction": "buy_v3",
+      "generated_label": "function_145095",
+      "disassembly_line": 150477,
+      "constant": "506517f5c41d0507"
+    },
+    {
+      "instruction": "buy_exact_quote_in_v3",
+      "generated_label": "function_145095",
+      "disassembly_line": 150480,
+      "constant": "8884b3d51e50f7e1"
+    },
+    {
+      "instruction": "sell_v3",
+      "generated_label": "function_145095",
+      "disassembly_line": 150483,
+      "constant": "d569c42677de921c"
+    },
+    {
+      "instruction": "multi_hop_curve_swap",
+      "generated_label": "function_145095",
+      "disassembly_line": 150486,
+      "constant": "67f656d716759ae1"
+    },
+    {
+      "instruction": "sweep_protocol_fee",
+      "generated_label": "function_145095",
+      "disassembly_line": 150489,
+      "constant": "e5b744b607be3008"
+    },
+    {
+      "instruction": "sweep_creator_fee",
+      "generated_label": "function_145095",
+      "disassembly_line": 150492,
+      "constant": "ba49c90834bff620"
+    },
+    {
+      "instruction": "buy",
+      "generated_label": "function_145095",
+      "disassembly_line": 150495,
+      "constant": "eaebda01123d0666"
+    },
+    {
+      "instruction": "buy_exact_sol_in",
+      "generated_label": "function_145095",
+      "disassembly_line": 150498,
+      "constant": "5fcddf9e0874fc38"
+    },
+    {
+      "instruction": "sell",
+      "generated_label": "function_145095",
+      "disassembly_line": 150501,
+      "constant": "ad837f01a485e633"
+    },
+    {
+      "instruction": "migrate",
+      "generated_label": "function_145095",
+      "disassembly_line": 150504,
+      "constant": "1ea29eec92e7ea9b"
+    },
+    {
+      "instruction": "migrate_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150507,
+      "constant": "29feedce1f12cbbb"
+    },
+    {
+      "instruction": "extend_account",
+      "generated_label": "function_145095",
+      "disassembly_line": 150510,
+      "constant": "e53e4896cbc266ea"
+    },
+    {
+      "instruction": "collect_creator_fee",
+      "generated_label": "function_145095",
+      "disassembly_line": 150513,
+      "constant": "84db1cc67b561614"
+    },
+    {
+      "instruction": "collect_creator_fee_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150516,
+      "constant": "38132204f28a11cf"
+    },
+    {
+      "instruction": "distribute_fee_to_holders",
+      "generated_label": "function_145095",
+      "disassembly_line": 150519,
+      "constant": "2bad460261913662"
+    },
+    {
+      "instruction": "set_metaplex_creator",
+      "generated_label": "function_145095",
+      "disassembly_line": 150522,
+      "constant": "f6c55530d9ae608a"
+    },
+    {
+      "instruction": "set_creator",
+      "generated_label": "function_145095",
+      "disassembly_line": 150525,
+      "constant": "a5aa8ecf70ff94fe"
+    },
+    {
+      "instruction": "admin_cto",
+      "generated_label": "function_145095",
+      "disassembly_line": 150528,
+      "constant": "59bce54d86d67e7d"
+    },
+    {
+      "instruction": "admin_update_token_incentives",
+      "generated_label": "function_145095",
+      "disassembly_line": 150531,
+      "constant": "cc7c17d557730bd1"
+    },
+    {
+      "instruction": "claim_token_incentives",
+      "generated_label": "function_145095",
+      "disassembly_line": 150534,
+      "constant": "1b2801cc1c470410"
+    },
+    {
+      "instruction": "claim_cashback",
+      "generated_label": "function_145095",
+      "disassembly_line": 150537,
+      "constant": "c5e435be7e233a25"
+    },
+    {
+      "instruction": "claim_cashback_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150540,
+      "constant": "371d745e41ccf37a"
+    },
+    {
+      "instruction": "init_user_volume_accumulator",
+      "generated_label": "function_145095",
+      "disassembly_line": 150543,
+      "constant": "b7e860ff73ca065e"
+    },
+    {
+      "instruction": "close_user_volume_accumulator",
+      "generated_label": "function_145095",
+      "disassembly_line": 150546,
+      "constant": "8a546796daa445f9"
+    },
+    {
+      "instruction": "sync_user_volume_accumulator",
+      "generated_label": "function_145095",
+      "disassembly_line": 150549,
+      "constant": "ee4f57a357c01f56"
+    },
+    {
+      "instruction": "admin_set_idl_authority",
+      "generated_label": "function_145095",
+      "disassembly_line": 150552,
+      "constant": "5c06890e760d908"
+    },
+    {
+      "instruction": "migrate_bonding_curve_creator",
+      "generated_label": "function_145095",
+      "disassembly_line": 150555,
+      "constant": "e8d62634bf347c57"
+    },
+    {
+      "instruction": "get_minimum_distributable_fee",
+      "generated_label": "function_145095",
+      "disassembly_line": 150558,
+      "constant": "23445f86ca7fe175"
+    },
+    {
+      "instruction": "distribute_creator_fees",
+      "generated_label": "function_145095",
+      "disassembly_line": 150561,
+      "constant": "51f7ce79006772a5"
+    },
+    {
+      "instruction": "distribute_creator_fees_v2",
+      "generated_label": "function_145095",
+      "disassembly_line": 150564,
+      "constant": "9f0844f44f13cbff"
+    },
+    {
+      "instruction": "update_buyback_config",
+      "generated_label": "function_145095",
+      "disassembly_line": 150567,
+      "constant": "e9711aa092abe0fb"
+    },
+    {
+      "instruction": "initialize_quote_control",
+      "generated_label": "function_145095",
+      "disassembly_line": 150570,
+      "constant": "4254b1d1adf549ef"
+    },
+    {
+      "instruction": "set_quote_control_admin",
+      "generated_label": "function_145095",
+      "disassembly_line": 150573,
+      "constant": "d2d6aaa5d3a14f3e"
+    },
+    {
+      "instruction": "add_quote_control_mint",
+      "generated_label": "function_145095",
+      "disassembly_line": 150576,
+      "constant": "5f0e8eaa8a3d0e02"
+    },
+    {
+      "instruction": "remove_quote_control_mint",
+      "generated_label": "function_145095",
+      "disassembly_line": 150579,
+      "constant": "a6daa5511afd07df"
+    },
+    {
+      "instruction": "set_quote_control_reserves_admin",
+      "generated_label": "function_145095",
+      "disassembly_line": 150582,
+      "constant": "3ec065e1a5dec3a1"
+    },
+    {
+      "instruction": "set_quote_control_mint_reserves",
+      "generated_label": "function_145095",
+      "disassembly_line": 150585,
+      "constant": "49202cbf536bdc74"
+    }
+  ]
+}
