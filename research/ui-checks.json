@@ -1,37 +1,37 @@
 {
-  "date": "2026-10-21T09:46:26.146191+00:00",
-  "reference": "Pump.fun public Explore, create and coin interfaces inspected on 21 October 2026",
+  "date": "2026-10-21T10:17:08.911735+00:00",
+  "reference": "User-selected Reverse Engineered Pump project; live board, launch and source viewer plus retained coin interface source inspected",
   "desktop_viewport": {
     "width": 1280,
     "page_width": 1280
   },
   "responsive_css_check": {
-    "method": "Same-origin iframe in the in-app browser",
+    "method": "390px same-origin iframe in in-app browser",
     "width": 390,
     "page_width": 390,
     "views": [
-      "Explore",
+      "Board",
       "Create",
-      "Trading"
+      "Trading",
+      "Source"
     ],
     "horizontal_overflow": false
   },
   "manual_browser_checks_passed": [
-    "Real devnet coin grid and table views",
-    "Watchlist add, persistence through reload/navigation, removal and empty state",
-    "Home groups the existing graduated TEST coin into the correct stage",
-    "On-curve and graduated filters",
-    "Search empty state and restoration of real results",
-    "Pasted mint opens the dedicated coin page",
-    "Collapsible navigation expands to 212 pixels and collapses",
-    "Create form updates name, ticker and description preview",
-    "Image chooser converts a local PNG fixture to an 887-character WebP data URL",
-    "Create action opens no-wallet chooser while retaining form content",
-    "Price and inferred market-cap chart controls",
-    "Trades and About tabs show on-chain fills and metadata",
-    "Buy and sell quote controls; tiny nonzero fees displayed to nine decimal places",
-    "History-unavailable state shown when the free public RPC rate-limits the request",
-    "Bundled Geist font renders locally"
+    "Confirmed devnet coin board and empty search result",
+    "Market-cap/name/progress sorting and direction controls",
+    "Animations on/off state",
+    "Watchlist add and opening saved coin",
+    "Live name/ticker/description preview",
+    "PNG upload converted to local WebP and preview",
+    "Create action opens no-wallet dialog while retaining form",
+    "Real five-fill chart and trades",
+    "Price/market-cap controls and About tab",
+    "Buy and sell quick amounts and exact tiny fee display",
+    "Embedded source switching and clipboard equality",
+    "Curve lab budget updates with actual integer quotes",
+    "Navy/mint reference layout on desktop and 390px CSS layout",
+    "No desktop browser console warnings or errors"
   ],
   "client_wallet_contract_tests": 8,
   "typescript_build": "passed",
@@ -41,7 +41,7 @@
   "limitations": [
     "Actual extension-wallet approval not exercised",
     "Physical Safari/Android devices not tested",
-    "Not full Pump.fun feature or data parity",
-    "Free public RPC history can be temporarily unavailable; no sample market activity is substituted"
+    "No source-project backend, mainnet configuration, fee policy or REA claims imported",
+    "Free public RPC history may be temporarily unavailable"
   ]
 }

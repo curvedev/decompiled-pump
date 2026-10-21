@@ -11,3 +11,5 @@ research/raw/
 .openai/
 __pycache__/
 *.pyc
+
+web/source-content.generated.json
