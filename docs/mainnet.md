@@ -29,7 +29,7 @@ Private custody backup/handoff must be completed separately without publishing k
 - Modeled base upload fees: 0.001500 SOL, assuming two signatures per modeled upload transaction and zero priority price. Fees/retries can vary.
 - Approved total deployer funding: **1.35 SOL**, including upload peak, limited verification headroom and unspent reserve. This is not a claim that all 1.35 SOL is permanently spent.
 - Maximum metadata coin-account rent: 0.02569972 SOL, plus network fees and any user token account. Users fund their own launches. No project token or paid provider is enabled.
-- Static hosting and public RPC have no configured subscription. Public RPC can rate-limit; this is a small experimental release, with no capacity guarantee.
+- The browser uses PublicNode's public Solana RPC, with paginated transaction-based discovery and validated coin accounts; see [interface.md](interface.md#mainnet-browser-reads). Operator tools keep the official Solana RPC. Static hosting and public RPC have no configured subscription. Public RPC can rate-limit; this is a small experimental release, with no capacity guarantee.
 
 The upload buffer can be refunded to its actual authority's chosen recipient if validly abandoned; inspect its chain owner/authority first. Eligible ProgramData rent (currently 0.638073400 SOL) is recoverable only under loader retirement conditions. The small Program account remains, retaining 0.000833120 SOL at the quoted rent. ProgramData closure disables the protocol and can strand user funds. Founding pool liquidity, user deposits, mint rent and launch-state/metadata rent have no operator recovery instruction. Transaction fees are nonrefundable.
 
@@ -39,7 +39,7 @@ The user additionally required a backend recovery path before deployment. [opera
 
 ## Validation and release gates
 
-The exact mainnet candidate passed 42 local protocol checks, including separate treasury claims, initial reserve agreement, slippage rollback, conservation, graduation and pool swaps. Six Rust tests passed, including 10,000 arithmetic round trips. Ten client/wallet/network tests pass in both network modes. Real extension-wallet approvals, physical devices, broad adversarial concurrency and independent security review remain unverified; this is not an audited release.
+The exact mainnet candidate passed 42 local protocol checks, including separate treasury claims, initial reserve agreement, slippage rollback, conservation, graduation and pool swaps. Six Rust tests passed, including 10,000 arithmetic round trips. Sixteen client/wallet/network/discovery tests pass in both network modes. Real extension-wallet approvals, physical devices, broad adversarial concurrency and independent security review remain unverified; this is not an audited release.
 
 `python3 scripts/build-program.py --network mainnet` builds a separate artifact in `target/mainnet`. `DEPUMP_NETWORK=mainnet npm run build` builds a mainnet-labeled frontend. Wallet chain identifiers, genesis hash, program, treasury, pending launch storage, watchlists and explorer links are network-specific.
 

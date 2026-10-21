@@ -10,7 +10,7 @@
 | Original runtime tests | Four buys, four sells, four failed-slippage rollback cases executed in LiteSVM against pinned Pump bytes |
 | Independent program | sBPF build passes; own System/SPL-only execution path for creation, trades, claims, graduation and pool swaps |
 | Protocol validation | 37 initial localhost validator checks; 41 checks against corrected/remapped artifact in LiteSVM, including authorized platform claim |
-| Arithmetic/client | Six Rust tests (10,000 randomized cases in one test); ten client/wallet/network tests in each network mode; TypeScript and static build pass |
+| Arithmetic/client | Six Rust tests (10,000 randomized cases in one test); sixteen client/wallet/network/discovery tests in each network mode; TypeScript and static build pass |
 | Wallet approval validation | Adapter contracts tested with ephemeral mock wallets; actual browser-extension approval flows not verified |
 | Browser/layout QA | User-selected Reverse Engineered Pump board/create/coin/source layouts, watchlist, search, preview/image conversion, chart metrics and quotes checked; 390-pixel CSS layout checked in an iframe; physical mobile devices and actual wallet approvals remain unverified |
 | Devnet funding/deployment | Official faucet supplied 2.5 free test SOL; finalized program bytes and upgrade authority verified; TEST coin completed nine finalized lifecycle transactions including claims, graduation and pool swaps |

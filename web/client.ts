@@ -1,4 +1,5 @@
-import {CONFIG,networkLabel,storageKey} from './network.ts';
+import {LaunchDiscovery} from './discovery.ts';
+import {MAINNET,CONFIG,networkLabel,storageKey} from './network.ts';
 import {Connection,PublicKey,Keypair,Transaction,VersionedTransaction,ComputeBudgetProgram,TransactionInstruction} from '@solana/web3.js';
 import {createAssociatedTokenAccountIdempotentInstruction,getAssociatedTokenAddressSync} from '@solana/spl-token';
 import {PROGRAM,RPC,pda,decodeCoin,createInstruction,writeInstruction,sealInstruction,tradeInstruction,freshCoin,tokensForBudget,quote,encoder,type Coin,type Metadata} from './protocol.ts';
@@ -41,8 +42,19 @@ export async function metadata(coin:Coin):Promise<Metadata>{
   if(typeof data.name!=='string'||typeof data.ticker!=='string'||typeof data.description!=='string'||typeof data.image!=='string')throw new Error('Metadata format is invalid');
   return data;
 }
-export async function listings(){
+const discovery=new LaunchDiscovery(PROGRAM);
+export const moreListings=()=>MAINNET&&discovery.hasOlder;
+export async function listings(older=false){
   await networkCheck();
+  if(MAINNET){
+    await discovery.scan(connection,older);
+    const addresses=[...discovery.mints].map(mint=>pda('coin',new PublicKey(mint))),coins:Coin[]=[];
+    for(let i=0;i<addresses.length;i+=50){
+      const group=addresses.slice(i,i+50),accounts=await connection.getMultipleAccountsInfo(group);
+      accounts.forEach((account,j)=>{if(!account?.owner.equals(PROGRAM))return;try{const coin=decodeCoin(group[j],account.data);if(coin.sealed)coins.push(coin);}catch{/* Reject invalid accounts. */}});
+    }
+    return coins;
+  }
   const values=await connection.getProgramAccounts(PROGRAM,{filters:[{dataSize:204}]});
   return values.flatMap(a=>{try{const coin=decodeCoin(a.pubkey,a.account.data);return coin.sealed?[coin]:[];}catch{return[];}});
 }

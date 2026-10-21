@@ -9,3 +9,11 @@ DEPUMP retains its own name, original mark, dedicated program, fixed economic ru
 The Board, Your coins and Watchlist tabs preserve existing account filtering and local saved mints. Sorting uses market cap, name or curve progress because the account format has no creation timestamp. The reference's animations control disables interface motion and respects reduced-motion preferences. No remote fonts or analytics are loaded. Unused Geist font source and license from the earlier interface remain in the repository for provenance; the active interface uses the reference's system font stack.
 
 Listings share an in-flight request and a 15-second cache. RPC requests have a 12-second timeout and one retry on HTTP 429. Recent-fill history shares pending requests and caches success for 60 seconds. Explicit refresh refetches. The free public RPC may temporarily fail to return history. Browser verification details are in `research/ui-checks.json`; wallet-extension approvals and physical devices remain untested.
+
+## Mainnet browser reads
+
+The mainnet frontend uses PublicNode's public Solana RPC. The official Solana endpoint returned HTTP 403 for browser-origin requests, while PublicNode permits the ledger/account reads used here. No provider key or paid account is embedded. The operator deployment and recovery tools retain their explicitly pinned official mainnet RPC.
+
+Mainnet launches are discovered from successful Create instructions in confirmed program transactions, including inner instructions, then checked against current program-owned, correctly derived, sealed coin accounts. Activity is paginated in 20-signature pages with single transaction reads; use **Load older activity** to discover earlier launches. Failed, malformed or incomplete history never establishes a coin. This is paginated discovery, not a claim of a complete live index. Devnet continues to use its account scan. Metadata is verified and cached by its on-chain hash, with five concurrent fetches at most.
+
+Provider documentation: https://solana.publicnode.com/. Solana documents public endpoint blocking and rate limits at https://solana.com/docs/references/clusters. Read-only live validation is recorded in `research/mainnet-browser-rpc.json`.

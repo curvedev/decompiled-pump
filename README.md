@@ -5,7 +5,7 @@ An independent experimental Solana launchpad and a public record of deployed-pro
 ## Current status
 
 - Native Rust program builds to sBPF. Coin creation, curve buys/sells, separate fee claims, explicit graduation, and independent post-graduation swaps are implemented.
-- Six Rust tests, including 10,000 randomized arithmetic cases; ten client/wallet/network tests in each network mode; 42 protocol checks against the mainnet artifact in LiteSVM. Seven recovery contract tests, eight native recovery checks and eight native upload checks pass. Updated verification results are recorded in `research/`.
+- Six Rust tests, including 10,000 randomized arithmetic cases; sixteen client/wallet/network/discovery tests in each network mode; 42 protocol checks against the mainnet artifact in LiteSVM. Seven recovery contract tests, eight native recovery checks and eight native upload checks pass. Updated verification results are recorded in `research/`.
 - Pump, PumpSwap, and Pump Fees executables were captured and hashed. The Pump executable was disassembled with Anza's sBPF tool. Four buys and four sells ran against that captured executable in LiteSVM, with fee observations and failed-slippage rollback checks.
 - [Public mainnet launchpad](https://depump.fun/) uses the finalized, byte-verified mainnet program and separately held operator roles. No mainnet coin was launched during deployment. The prior devnet TEST coin completed nine finalized lifecycle transactions. See [mainnet verification](research/mainnet-deployment.json), [status](docs/status.md), and the separate [devnet results](research/devnet-smoke-results.json).
 - User-selected Reverse Engineered Pump interface: classic board, bracket navigation with GitHub links, coin search, watchlist, live create preview, and chart/trade panels. Desktop and 390-pixel CSS layouts were browser-checked; actual extension-wallet approvals and physical mobile devices remain unverified. See [interface recreation](docs/interface.md).
@@ -25,6 +25,8 @@ npm run dev
 ```
 
 Development builds default to devnet. The published mainnet frontend is built with `DEPUMP_NETWORK=mainnet npm run build` and checks the full mainnet genesis hash before signing. `python3 scripts/build-program.py --network mainnet` produces the separately compiled mainnet executable. For a **local-only** preview, set `VITE_RPC_URL=http://127.0.0.1:8899`. Never publish a frontend build configured for a local validator.
+
+The mainnet browser uses the public PublicNode endpoint and paginated, account-validated launch discovery; see [browser RPC and listing scope](docs/interface.md#mainnet-browser-reads). Operator tools keep their pinned official RPC.
 
 The default esbuild build generates `dist/`, with content-versioned relative asset URLs and source maps disabled. `scripts/package-pages.py` copies the build into `docs/` for GitHub Pages while preserving protocol documentation. No server, database, account login, paid RPC, or upload service is required. Coin thumbnails and metadata are stored on-chain; the browser downsizes and re-encodes images before signing. `npm run dev` builds and serves on loopback port 5187; rebuild and refresh after editing.
 

@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-21T13:54:55.649Z",
+  "mainnet_browser_rpc": "https://solana-rpc.publicnode.com",
+  "mainnet_genesis": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+  "mainnet_program": "4SBqwENU4drhkJY32ZjpZTtXvhRydVffaxfA3CPR4qgH",
+  "mainnet_discovered_coins": 0,
+  "known_devnet_create_parsed_correctly": true,
+  "transactions_sent": 0,
+  "page_size": 20,
+  "transaction_request_batch_size": 1,
+  "client_tests_per_network": 16,
+  "discovery_tests": 6,
+  "limits": [
+    "Public RPC limits apply",
+    "Older launches require loading older activity",
+    "No real wallet approval or mainnet coin creation exercised"
+  ],
+  "local_browser_feed_verified": "0 mainnet coins loaded without an RPC error",
+  "browser_verified_at": "2026-10-21T13:57:06.151750+00:00"
+}
