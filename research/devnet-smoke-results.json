@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-21T09:09:54.640Z",
+  "cluster": "devnet",
+  "commitment": "finalized",
+  "program": "8pCWBPUbkivA94J2dLC4rzJmx7kHGrV3qD378DkhAM71",
+  "test_mint": "5XTugxp36qQ4PTm15uLgHazPG6ioVra1gefwsahc5CY1",
+  "test_ticker": "TEST",
+  "project_token_created": false,
+  "checks_in_final_run": 15,
+  "resumed_after_rpc_rate_limit": true,
+  "passed": true,
+  "transactions": [
+    {
+      "action": "create",
+      "signature": "EuV8Zyvcr8fFuBMMhg6YYbgcb3VnrVYYkBJxRiAeDAKiDJ8CoVphYCeXr9YJa2ZsCh8qJVmxkVFdmhwhLYqH2nM"
+    },
+    {
+      "action": "seal metadata",
+      "signature": "3NufcmGnUuGNKkBR9Y5yF94TJkZrTXHE4vLQgLvvscSEV715X3APfTiRf3Ja81LRvEjEPEiznuNKSFA1oyY2BebW"
+    },
+    {
+      "action": "curve buy",
+      "signature": "5GxP3yqffnAFjRwfock4byjEVMNTnYn5zQjusW1fWALhcamcN6RK4dZGJYvegZMyeqFihC8CxL25zHJVaRNtbkbe"
+    },
+    {
+      "action": "curve sell",
+      "signature": "41NeziURvBJWrPwumzP4MvThR8ar8azLomoZSC6SD1wxbxbDk1UXmjiQa3ezCQMPQmxzva98zFL6cR9vaTs6Lo1G"
+    },
+    {
+      "action": "creator and platform claims",
+      "signature": "Qi2teFd9HGVSmxmyyLQLgebzXTrGLPLW6yK7rk7AwR6FfCrGVeJywFRovHXCqNc5DoVqw67vvZDHhZXBscomCFk"
+    },
+    {
+      "action": "complete curve",
+      "signature": "qvYxaDngZviDdzeuoeTJTtj2UNTJzASUV2ZJuBWsR3HZZmRGwjrxXvYyYTECM7CjSqP9LuSLe1NKmzncEn7sDdX"
+    },
+    {
+      "action": "graduate",
+      "signature": "58HfZsv4KN8rG5XG95Hkm7ka5NZDGzopPbHFj7zGHUog5krEY9D1gJZyd1mLMa5pimLX8omstJ9qvz1kKDsoQKpZ"
+    },
+    {
+      "action": "pool buy",
+      "signature": "3YQbpU5SDvMiDgtgWdRTEjtACUFyiJcm41FZxtdwt3my2UmNukN8QjUkiiUUdwusWtwi11arpYJ6VbtR3Sc8p1mm"
+    },
+    {
+      "action": "pool sell",
+      "signature": "3SxBjS9Q45DQhuJbfwo9ZUyHPRUm7Xfow5joeEmKrrXbYcnwQwW8a8NWkPJBwJ9jyqZH4p2bdrFFnHfjoXynDbY8"
+    }
+  ],
+  "test_wallet_net_lamports_used": 93262455,
+  "limits": [
+    "Free test SOL only",
+    "Single dedicated operator signs this smoke test; distinct-role authorization is covered by local tests",
+    "No browser-extension wallet approval exercised",
+    "Not a security audit"
+  ]
+}

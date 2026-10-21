@@ -7,7 +7,8 @@ An independent experimental Solana launchpad and a public record of deployed-pro
 - Native Rust program builds to sBPF. Coin creation, curve buys/sells, separate fee claims, explicit graduation, and independent post-graduation swaps are implemented.
 - Six Rust tests, including 10,000 randomized arithmetic cases; eight client/wallet tests; 37 initial validator checks and 41 checks against the corrected program in LiteSVM. Updated verification results are recorded in `research/`.
 - Pump, PumpSwap, and Pump Fees executables were captured and hashed. The Pump executable was disassembled with Anza's sBPF tool. Four buys and four sells ran against that captured executable in LiteSVM, with fee observations and failed-slippage rollback checks.
-- Devnet deployment, public frontend publication, and real extension-wallet approval validation must each be verified separately. See [status](docs/status.md).
+- [Public devnet launchpad](https://curvedev.github.io/decompiled-pump/) is live. Finalized deployed bytes match the tested artifact. A fictional TEST coin completed nine finalized lifecycle transactions, including graduation and pool swaps. See [status](docs/status.md) and the precise [devnet results](research/devnet-smoke-results.json).
+- Desktop rendering, live listings/history/quotes and the no-wallet fallback were checked in the browser. Actual extension-wallet approvals and mobile rendering remain unverified.
 - REA was explicitly waived. We do not claim recovered original source, a byte-for-byte rebuild, a completed security audit, or complete equivalence.
 
 ## Build and run

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-21T09:07:16.695845+00:00",
+  "cluster": "devnet",
+  "commitment": "finalized",
+  "program": "8pCWBPUbkivA94J2dLC4rzJmx7kHGrV3qD378DkhAM71",
+  "programdata": "Fo6cP9SWCYUgqxjtFvc7o2FjFQCrKYyHLM5kw5MTRnni",
+  "deployment_slot": 513471788,
+  "finalized_context_slot": 513472013,
+  "upgrade_authority": "GAjNZJrEC48Dc7Y1N8foJnbrknRbVTuGJXpdL13npmrb",
+  "executable_bytes": 125416,
+  "executable_sha256": "34b6786bfa62543ec9ed27c1ae717c09866344521f9c08394ca735bebdd16956",
+  "exact_byte_match": true,
+  "upgradeable": true,
+  "project_token_created": false,
+  "deployment_signature": "37sXk4K3HXoLhR3zsdWg4d1pFegnAAjmEbJCVgHTdY81jXCCMZfxnGAPA698tVoLVsJqXyYkrrpZbKtee5iNRdpU"
+}

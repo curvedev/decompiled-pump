@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-21T08:31:34.458022+00:00",
+  "date": "2026-10-21T09:11:09.917832+00:00",
   "protocol_checks": 41,
   "protocol_checks_passed": true,
   "rust_tests": 6,
@@ -11,11 +11,13 @@
   "binary_bytes": 125416,
   "binary_home_path_check": "passed",
   "source_maps": "disabled",
-  "public_source_push": "pending curvedev isolated CLI authorization",
-  "devnet_deployment": "pending free test SOL",
-  "visual_browser_QA": "not completed; browser-control timeouts",
-  "privacy_staged_check": "passed before initial commit",
-  "privacy_message_check": "passed before initial commit",
+  "public_source_push": "verified curvedev namespace, Anonymous author and committer",
+  "devnet_deployment": "finalized exact executable byte match and expected upgrade authority verified",
+  "visual_browser_QA": "desktop explore/create/coin, live listing/history/quotes and no-wallet fallback verified; mobile viewport override ineffective",
+  "privacy_staged_check": "rechecked before publication commit",
+  "privacy_message_check": "rechecked before publication commit",
   "privacy_history_archive_check": "recorded after commit in the packaged release-manifest.json",
-  "static_HTTP_asset": "200 response verified"
+  "static_HTTP_asset": "200 response verified",
+  "devnet_smoke": "passed: nine finalized transactions; 15 assertions in resumed final pass",
+  "public_site": "Pages build and exact public HTML verified"
 }

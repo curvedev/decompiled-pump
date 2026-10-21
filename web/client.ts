@@ -49,7 +49,7 @@ export async function sendAction(ixs:TransactionInstruction[],update:Update){
   if(sim.value.err)throw new Error('Simulation failed. '+readable(sim.value.logs));
   update('Approve in your wallet');const[signed]=await sign([tx]);
   const signature=await confirmSigned(connection,signed,block.lastValidBlockHeight,s=>update('Confirming transaction…',s));
-  update('Confirmed',signature);return signature;
+  tradeHistoryCache.clear();update('Confirmed',signature);return signature;
 }
 function readable(logs:string[]|null|undefined){return(logs||[]).filter(l=>/error|failed|insufficient/i.test(l)).slice(-2).join(' ').slice(0,400)||'No funds were moved.';}
 export type Pending={mint:string;creator:string;metadata:Metadata;budget:string};
@@ -81,7 +81,17 @@ export async function launch(data:Metadata,budget:bigint,update:Update,resume?:P
   for(let i=0;i<signed.length;i++)await confirmSigned(connection,signed[i],block.lastValidBlockHeight,s=>update(`Confirming launch ${i+1} of ${signed.length}…`,s));
   localStorage.removeItem('depump.pending');update('Coin launched');return mint;
 }
+type HistoryPoint={time:number;price:number;side:string;signature:string};
+const tradeHistoryCache=new Map<string,{expires:number,promise:Promise<HistoryPoint[]>}>();
 export async function history(coin:Coin){
+  const key=coin.mint.toBase58(),cached=tradeHistoryCache.get(key);
+  if(cached&&cached.expires>Date.now())return cached.promise;
+  const promise=readHistory(coin).catch(error=>{tradeHistoryCache.delete(key);throw error;});
+  tradeHistoryCache.set(key,{expires:Date.now()+15_000,promise});
+  if(tradeHistoryCache.size>100)tradeHistoryCache.delete(tradeHistoryCache.keys().next().value!);
+  return promise;
+}
+async function readHistory(coin:Coin){
   const signatures=await connection.getSignaturesForAddress(coin.address,{limit:30});
   const points:{time:number;price:number;side:string;signature:string}[]=[];
   // Bounded history. No claim that these are complete candles or an indexer.
