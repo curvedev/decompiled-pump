@@ -1,6 +1,6 @@
 # Security and readiness limits
 
-This is experimental devnet software, not a completed audit or a mainnet launch recommendation. The user has requested mainnet preparation; real SOL expenditure still awaits approval of the specific budget and wallet roles. No project-token launch is authorized.
+This is experimental devnet software, not a completed audit or a mainnet launch recommendation. The user has requested mainnet preparation; the specific 1.35 SOL cap and separate wallet roles have been approved, conditional on the tested local recovery backend. Mainnet deployment remains pending funding. No project-token launch is authorized.
 
 Validated locally: fixed supply and absent freeze authority; metadata commitment/sealing and creator authorization; buy/sell slippage failure and rollback; wrong vault and signer rejection; separate fee liabilities; unauthorized claim rejection; duplicate claim rejection; graduation gating/idempotency; pool swaps; token/SOL conservation and pool-product behavior in the tested paths. Unit tests exercise arithmetic edges and 10,000 deterministic randomized curve round trips. Results have finite scope.
 

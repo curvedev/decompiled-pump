@@ -12,5 +12,8 @@
   "creator_bps": 25,
   "pool_lp_bps": 30,
   "domain": "depump.fun",
-  "deployed": false
+  "deployed": false,
+  "upload_buffer": "CN2fL3aG1xZAqqRjQ8qYYHeBPR8tGmTDdpLKbQi6EZid",
+  "cost_and_roles_approved": true,
+  "recovery_backend_required": true
 }

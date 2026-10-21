@@ -44,7 +44,9 @@ def deploy(c,args):
     assert not report['program_exists'],'Existing mainnet program requires a separate upgrade review'
     assert report['roles_balance_lamports']['deployer']>=approval['max_total_debit_lamports'],'Dedicated deployer is not funded'
     assert report['peak_program_buffer_rent_lamports']+report['modeled_upload_base_fees_lamports']+40_000_000<=approval['max_total_debit_lamports'],'Rent exceeds approved budget'
-    tested=json.loads((ROOT/'research/mainnet-local-tests.json').read_text());assert tested['passed'] and tested['checks']>=41 and tested['program']==c['program'] and tested['binarySha256']==report['binary_sha256']
+    tested=json.loads((ROOT/'research/mainnet-local-tests.json').read_text());assert tested['passed'] and tested['checks']>=42 and tested['program']==c['program'] and tested['binarySha256']==report['binary_sha256']
+    recovery=subprocess.run(['node','--test','tests/recovery.test.mjs'],cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    assert recovery.returncode==0,'User-required operator recovery backend checks failed'
     operator=pathlib.Path(args.operator_dir).resolve();keys={'program':'program','deployer':'deployer','upgrade_authority':'upgrade-authority','treasury':'treasury','recovery':'recovery'}
     for role,name in keys.items():
         actual=subprocess.check_output([args.keygen,'pubkey',str(operator/(name+'.json'))],text=True).strip();assert actual==c[role],'Wrong '+role+' signer'

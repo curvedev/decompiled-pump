@@ -1,6 +1,6 @@
 # Mainnet release candidate
 
-Mainnet requested by the user on 21 October 2026. Deployment is prepared, but real expenditure and wallet-role approval are pending. The existing public application remains devnet until the new deployment is verified. No $DEPUMP project token is part of this release.
+Mainnet requested by the user on 21 October 2026. The user approved the 1.35 SOL cap and fresh wallet roles, conditional on an operator recovery path. That backend is implemented and tested; deployment is prepared and remains pending funding. The existing public application remains devnet until the new deployment is verified. No $DEPUMP project token is part of this release.
 
 ## Proposed roles
 
@@ -28,6 +28,10 @@ Private custody backup/handoff must be completed separately without publishing k
 - Static hosting and public RPC have no configured subscription. Public RPC can rate-limit; this is a small experimental release, with no capacity guarantee.
 
 The upload buffer can be refunded to its actual authority's chosen recipient if validly abandoned; inspect its chain owner/authority first. The remaining program rent is recoverable only under loader retirement conditions. Program closure disables the protocol and can strand user funds. Founding pool liquidity, user deposits, mint rent and launch-state/metadata rent have no operator recovery instruction. Transaction fees are nonrefundable.
+
+## Operator recovery
+
+The user additionally required a backend recovery path before deployment. [operator-recovery.md](operator-recovery.md) documents the local prepare/sign/submit flow. It recovers eligible operator wallets, the project upload buffer, fixed-treasury fee claims and ProgramData rent only when retirement will not strand launched coins. Seven offline recovery checks pass. Transaction fees and user/pool funds are excluded.
 
 ## Validation and release gates
 
