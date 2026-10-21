@@ -1,6 +1,6 @@
 # Deployment and wallet roles
 
-This release is **devnet-only**. No mainnet deployment or project token launch is authorized.
+The published release remains **devnet-only** while the user-requested mainnet candidate awaits approval of actual costs and fresh wallet roles. See [mainnet.md](mainnet.md). No project-token launch is authorized.
 
 ## Current project identities
 

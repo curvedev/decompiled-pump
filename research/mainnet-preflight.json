@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-21T10:40:21.338442+00:00",
+  "network": "mainnet-beta",
+  "genesis": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+  "program": "4SBqwENU4drhkJY32ZjpZTtXvhRydVffaxfA3CPR4qgH",
+  "binary_bytes": 125432,
+  "binary_sha256": "24288be397ade5b5fddeb452b3749bd6f9401e019244ea1f0285db3d9c750530",
+  "rent": {
+    "program": {
+      "bytes": 36,
+      "lamports": 833120
+    },
+    "programdata": {
+      "bytes": 125477,
+      "lamports": 638073400
+    },
+    "upload_buffer": {
+      "bytes": 125469,
+      "lamports": 638032760
+    },
+    "mint": {
+      "bytes": 82,
+      "lamports": 1066800
+    },
+    "vault": {
+      "bytes": 165,
+      "lamports": 1488440
+    },
+    "coin": {
+      "bytes": 204,
+      "lamports": 1686560
+    },
+    "metadata_max": {
+      "bytes": 4096,
+      "lamports": 21457920
+    }
+  },
+  "permanent_program_rent_lamports": 638906520,
+  "peak_program_buffer_rent_lamports": 1276939280,
+  "modeled_upload_base_fees_lamports": 1500000,
+  "priority_fee_lamports": 0,
+  "proposed_funding_lamports": 1350000000,
+  "new_coin_max_metadata_rent_lamports": 25699720,
+  "required_operator_liquidity_lamports": 0,
+  "roles_balance_lamports": {
+    "program": 0,
+    "deployer": 0,
+    "upgrade_authority": 0,
+    "treasury": 0,
+    "recovery": 0
+  },
+  "program_exists": false,
+  "recurring_paid_service_configured": false,
+  "deployed": false
+}

@@ -1,13 +1,14 @@
+import {CONFIG} from './network.ts';
 import { Buffer } from 'buffer';
 import { PublicKey, SystemProgram, TransactionInstruction } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync } from '@solana/spl-token';
-export const PROGRAM = new PublicKey('8pCWBPUbkivA94J2dLC4rzJmx7kHGrV3qD378DkhAM71');
-export const TREASURY = new PublicKey('GAjNZJrEC48Dc7Y1N8foJnbrknRbVTuGJXpdL13npmrb');
-export const RPC = import.meta.env?.VITE_RPC_URL || 'https://api.devnet.solana.com';
+export const PROGRAM = new PublicKey(CONFIG.program);
+export const TREASURY = new PublicKey(CONFIG.treasury);
+export const RPC = import.meta.env?.VITE_RPC_URL || CONFIG.rpc;
 export const SUPPLY = 1_000_000_000_000_000n;
 export const REAL_TOKEN = 793_100_000_000_000n;
 export const INITIAL_TOKEN = 1_073_000_000_000_000n;
-export const INITIAL_SOL = 30_000_000n;
+export const INITIAL_SOL = CONFIG.initialSol;
 export type Coin = {
   address: PublicKey; creator: PublicKey; mint: PublicKey; vault: PublicKey; phase: number;
   virtualToken: bigint; virtualSol: bigint; realToken: bigint; realSol: bigint;

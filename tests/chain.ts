@@ -3,13 +3,13 @@ import {getAssociatedTokenAddressSync,createAssociatedTokenAccountIdempotentInst
 import {createHash} from 'node:crypto';
 import {writeFileSync,readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
-import {PROGRAM,TREASURY,createInstruction,writeInstruction,sealInstruction,tradeInstruction,graduateInstruction,claimInstruction,decodeCoin,pda,quote,REAL_TOKEN,SUPPLY} from '../web/protocol.ts';
+import {PROGRAM,TREASURY,createInstruction,writeInstruction,sealInstruction,tradeInstruction,graduateInstruction,claimInstruction,decodeCoin,pda,quote,REAL_TOKEN,SUPPLY,INITIAL_SOL} from '../web/protocol.ts';
 
 const endpoint=process.env.LOCAL_RPC||'http://127.0.0.1:8899';
 if(!/^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(endpoint))throw new Error('Chain tests are restricted to localhost');
 let svm:any=null,Failed:any=null;
 const lite=process.env.CHAIN_RUNTIME==='lite';
-if(lite){const runtime=await import(process.env.LITESVM_MODULE||'litesvm');svm=new runtime.LiteSVM().withNativeMints();Failed=runtime.FailedTransactionMetadata;svm.addProgramFromFile(PROGRAM,'target/deploy/depump.so');}
+if(lite){const runtime=await import(process.env.LITESVM_MODULE||'litesvm');svm=new runtime.LiteSVM().withNativeMints();Failed=runtime.FailedTransactionMetadata;svm.addProgramFromFile(PROGRAM,process.env.TEST_BINARY||'target/deploy/depump.so');}
 const connection=new Connection(endpoint,'confirmed');
 const c:any=lite?{
   requestAirdrop:async(key:PublicKey,n:number)=>{svm.airdrop(key,BigInt(n));return'airdrop';},
@@ -40,12 +40,13 @@ async function invariant(){
   ok(BigInt(a.lamports)===BigInt(rent)+reserves+s.creatorFees+s.platformFees,'SOL liabilities conserved');
   ok(vault.amount===(s.phase===0?s.realToken+SUPPLY-REAL_TOKEN:s.poolToken),'token inventory conserved');
 }
-for(const who of [user,stranger]){const sig=await c.requestAirdrop(who.publicKey,10_000_000_000);await c.confirmTransaction(sig,'confirmed');}
+for(const who of [user,stranger]){const sig=await c.requestAirdrop(who.publicKey,1_000_000_000_000);await c.confirmTransaction(sig,'confirmed');}
 const metadata=Buffer.from(JSON.stringify({name:'Local test coin',ticker:'TEST',description:'Generated during localhost verification',image:''}));
 const hash=createHash('sha256').update(metadata).digest();
 await send([createInstruction(user.publicKey,mint.publicKey,metadata,hash)],[user,mint]);
 const s0=await state();
 ok(s0.realToken===REAL_TOKEN,'initial token reserves');
+ok(s0.virtualSol===INITIAL_SOL,'compiled reserves match client network configuration');
 const tokenMint=await getMint(c,mint.publicKey);
 ok(tokenMint.mintAuthority===null&&tokenMint.freezeAuthority===null&&tokenMint.supply===SUPPLY,'fixed supply and no freeze authority');
 const ata=getAssociatedTokenAddressSync(mint.publicKey,user.publicKey);
@@ -95,5 +96,5 @@ q=quote(s,poolBuy/2n,false);await send([tradeInstruction(user.publicKey,s,poolBu
 s=await state();ok(s.poolToken*s.poolSol>=product2,'pool product nondecreasing after sell');
 const unknown=new TransactionInstruction({programId:PROGRAM,keys:[],data:Buffer.from([8])});
 await reject([unknown],'unsupported liquidity withdrawal opcode rejected');
-writeFileSync('research/chain-test-results.json',JSON.stringify({date:new Date().toISOString(),network:lite?'LiteSVM synthetic local bank':'localhost validator',program:PROGRAM.toBase58(),binarySha256:createHash('sha256').update(readFileSync('target/deploy/depump.so')).digest('hex'),checks,passed:true,limits:['No browser wallet approval exercised','Not a security audit','Random runtime keys excluded from source']},null,2)+'\n');
+writeFileSync(process.env.TEST_REPORT||'research/chain-test-results.json',JSON.stringify({date:new Date().toISOString(),network:lite?'LiteSVM synthetic local bank':'localhost validator',program:PROGRAM.toBase58(),binarySha256:createHash('sha256').update(readFileSync(process.env.TEST_BINARY||'target/deploy/depump.so')).digest('hex'),checks,passed:true,limits:['No browser wallet approval exercised','Not a security audit','Random runtime keys excluded from source']},null,2)+'\n');
 console.log(JSON.stringify({passed:true,checks}));

@@ -1,11 +1,13 @@
+import {CONFIG} from '../web/network.ts';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {Keypair,PublicKey,SystemProgram,Transaction} from '@solana/web3.js';
 import {connect,disconnect,sign,confirmSigned} from '../web/wallet.ts';
 function mockWallet(key:Keypair,alter=false){
- const account={address:key.publicKey.toBase58(),publicKey:key.publicKey.toBytes(),chains:['solana:devnet']};
+ const account={address:key.publicKey.toBase58(),publicKey:key.publicKey.toBytes(),chains:[CONFIG.chain]};
  return{features:{'standard:connect':{connect:async()=>({accounts:[account]})},'solana:signTransaction':{
   supportedTransactionVersions:['legacy'],signTransaction:async(...inputs:any[])=>inputs.map(input=>{
+   assert.equal(input.chain,CONFIG.chain);
    const tx=Transaction.from(input.transaction);
    if(alter)tx.instructions[0]=SystemProgram.transfer({fromPubkey:key.publicKey,toPubkey:Keypair.generate().publicKey,lamports:2});
    tx.partialSign(key);return{signedTransaction:tx.serialize()};

@@ -1,19 +1,20 @@
+import {CONFIG,networkLabel} from './network.ts';
 import {getWallets} from '@wallet-standard/app';
 import {Connection,Transaction} from '@solana/web3.js';
 export const wallets=getWallets();
 export let active:any=null,account:any=null;
 let unsubscribe:(()=>void)|null=null;
-export function compatible(){return wallets.get().filter(w=>w.chains.includes('solana:devnet')&&w.features['standard:connect']&&w.features['solana:signTransaction']);}
+export function compatible(){return wallets.get().filter(w=>w.chains.includes(CONFIG.chain)&&w.features['standard:connect']&&w.features['solana:signTransaction']);}
 export async function connect(wallet:any){
   const result=await wallet.features['standard:connect'].connect();
-  const selected=result.accounts.find((a:any)=>a.chains.includes('solana:devnet'));
-  if(!selected)throw new Error('This wallet has no compatible devnet account');
+  const selected=result.accounts.find((a:any)=>a.chains.includes(CONFIG.chain));
+  if(!selected)throw new Error('This wallet has no compatible '+networkLabel+' account');
   active=wallet;account=selected;
   unsubscribe?.();
   if(wallet.features['standard:events'])unsubscribe=wallet.features['standard:events'].on('change',(change:any)=>{
     if(active!==wallet||!change.accounts)return;
     const previous=account?.address;
-    account=change.accounts.find((a:any)=>a.address===previous&&a.chains.includes('solana:devnet'))||null;
+    account=change.accounts.find((a:any)=>a.address===previous&&a.chains.includes(CONFIG.chain))||null;
     if(!account)active=null;
     window.dispatchEvent(new Event('depump-wallet-change'));
   });
@@ -31,7 +32,7 @@ export async function sign(transactions:Transaction[]):Promise<Transaction[]>{
   const feature=active.features['solana:signTransaction'];
   if(!feature.supportedTransactionVersions.includes('legacy'))throw new Error('Wallet does not support legacy transactions');
   const messages=transactions.map(t=>t.serializeMessage());
-  const outputs=await feature.signTransaction(...transactions.map(t=>({account,chain:'solana:devnet',transaction:t.serialize({requireAllSignatures:false,verifySignatures:false})})));
+  const outputs=await feature.signTransaction(...transactions.map(t=>({account,chain:CONFIG.chain,transaction:t.serialize({requireAllSignatures:false,verifySignatures:false})})));
   if(outputs.length!==transactions.length)throw new Error('Wallet did not return every transaction');
   return outputs.map((o:any,i:number)=>{
     const tx=Transaction.from(o.signedTransaction);

@@ -19,7 +19,7 @@ Initial reserves, in base units:
 | Field | Value |
 | --- | ---: |
 | Virtual token reserve X | 1,073,000,000,000,000 |
-| Virtual SOL reserve Y | 30,000,000 lamports (0.03 SOL) |
+| Virtual SOL reserve Y | Devnet: 30,000,000 lamports (0.03 SOL); mainnet candidate: 30,000,000,000 lamports (30 SOL) |
 | Sellable real token reserve | 793,100,000,000,000 |
 | Real SOL reserve | 0 |
 | Tokens reserved for graduation | 206,900,000,000,000 |

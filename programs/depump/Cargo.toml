@@ -10,6 +10,7 @@ crate-type = ["cdylib", "lib"]
 
 [features]
 no-entrypoint = []
+mainnet = []
 
 [dependencies]
 borsh = { version = "=1.5.7", features = ["derive"] }

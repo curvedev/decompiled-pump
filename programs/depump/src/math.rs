@@ -4,7 +4,10 @@ pub const SUPPLY: u64 = 1_000_000_000_000_000;
 pub const INITIAL_TOKEN: u64 = 1_073_000_000_000_000;
 pub const REAL_TOKEN: u64 = 793_100_000_000_000;
 // Deliberate devnet difference: 1/1000 of the documented historical SOL reserve.
+#[cfg(not(feature = "mainnet"))]
 pub const INITIAL_SOL: u64 = 30_000_000;
+#[cfg(feature = "mainnet")]
+pub const INITIAL_SOL: u64 = 30_000_000_000;
 pub const PLATFORM_BPS: u64 = 75;
 pub const CREATOR_BPS: u64 = 25;
 pub const LP_BPS: u64 = 30;
@@ -77,7 +80,7 @@ mod tests {
     #[test]
     fn graduation_has_real_liquidity() {
         let raised = buy_cost(INITIAL_TOKEN, INITIAL_SOL, REAL_TOKEN).unwrap();
-        assert!(raised > 80_000_000 && raised < 90_000_000);
+        assert!(raised > INITIAL_SOL * 8 / 3 && raised < INITIAL_SOL * 3);
         assert!(SUPPLY > REAL_TOKEN);
         let pool_base = SUPPLY - REAL_TOKEN;
         let cost = buy_cost(pool_base, raised, 1_000_000).unwrap();

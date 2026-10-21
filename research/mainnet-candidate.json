@@ -1,0 +1,16 @@
+{
+  "network": "mainnet-beta",
+  "genesis": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+  "rpc": "https://api.mainnet-beta.solana.com",
+  "program": "4SBqwENU4drhkJY32ZjpZTtXvhRydVffaxfA3CPR4qgH",
+  "deployer": "5Hw9fki4du7T4riEMU495yHzRzccVaH6Qt3YrkdAUbGg",
+  "upgrade_authority": "4pxnJyWVAirN6S7Bkw1c1nNAGQ7nmfsgqzPNSnp8g6Ry",
+  "treasury": "Gj5G8VAQ35gNyDhB3t39frQ95oeR3UjFsgn2rbpct5uU",
+  "recovery": "D5LmtoeWdqukY88bZFTgyj5tBC9jSLsP62zBnRD4uDB1",
+  "initial_virtual_sol_lamports": "30000000000",
+  "platform_bps": 75,
+  "creator_bps": 25,
+  "pool_lp_bps": 30,
+  "domain": "depump.fun",
+  "deployed": false
+}

@@ -66,3 +66,7 @@ For disassembly, build Anza's `sbpf_cli` at the commit recorded in [dispatch-map
 - [Costs and recovery](docs/costs-and-recovery.md)
 
 MIT covers this repository's original implementation. Third-party dependencies retain their licenses; [notices](THIRD_PARTY_NOTICES.md) distinguish research subjects from our code.
+
+## Mainnet candidate
+
+The user-requested mainnet preparation, fresh public wallet roles, exact candidate hash, current rent quote, limitations and approval gates are recorded in [docs/mainnet.md](docs/mainnet.md). The public site remains devnet until the separately built mainnet program is deployed and verified. No project token is included.
