@@ -46,7 +46,7 @@ function load(force=false):Promise<void>{
  if(loadTask)return loadTask;
  if(!force&&loadedAt&&Date.now()-loadedAt<15_000)return Promise.resolve();
  loading=true;loadError='';
- loadTask=(async()=>{try{coins=await listings();coinMeta=new Map();await Promise.all(coins.slice(0,100).map(async c=>{try{coinMeta.set(c.mint.toBase58(),await metadata(c));}catch{/* One malformed coin must not block the feed. */}}));loadedAt=Date.now();}catch(e){loadError=e instanceof Error?e.message:'Could not load the network';}finally{loading=false;loadTask=null;renderTicker();}})();
+ loadTask=(async()=>{try{coins=await listings();coinMeta=new Map();await Promise.all(coins.slice(0,100).map(async c=>{try{coinMeta.set(c.mint.toBase58(),await metadata(c));}catch{/* One malformed coin must not block the feed. */}}));loadedAt=Date.now();}catch(e){loadError=e instanceof Error&&/429|rate.limit/i.test(e.message)?'Solana devnet is busy. Try again shortly.':'Could not reach Solana devnet. Refresh to retry.';}finally{loading=false;loadTask=null;renderTicker();}})();
  return loadTask;
 }
 function activeNav(name:string){document.querySelectorAll('[data-nav]').forEach(a=>{const selected=(a as HTMLElement).dataset.nav===name;a.classList.toggle('active',selected);if(selected)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
