@@ -27,11 +27,11 @@ Private custody backup/handoff must be completed separately without publishing k
 - Maximum metadata coin-account rent: 0.02569972 SOL, plus network fees and any user token account. Users fund their own launches. No project token or paid provider is enabled.
 - Static hosting and public RPC have no configured subscription. Public RPC can rate-limit; this is a small experimental release, with no capacity guarantee.
 
-The upload buffer can be refunded to its actual authority's chosen recipient if validly abandoned; inspect its chain owner/authority first. The remaining program rent is recoverable only under loader retirement conditions. Program closure disables the protocol and can strand user funds. Founding pool liquidity, user deposits, mint rent and launch-state/metadata rent have no operator recovery instruction. Transaction fees are nonrefundable.
+The upload buffer can be refunded to its actual authority's chosen recipient if validly abandoned; inspect its chain owner/authority first. Eligible ProgramData rent (currently 0.638073400 SOL) is recoverable only under loader retirement conditions. The small Program account remains, retaining 0.000833120 SOL at the quoted rent. ProgramData closure disables the protocol and can strand user funds. Founding pool liquidity, user deposits, mint rent and launch-state/metadata rent have no operator recovery instruction. Transaction fees are nonrefundable.
 
 ## Operator recovery
 
-The user additionally required a backend recovery path before deployment. [operator-recovery.md](operator-recovery.md) documents the local prepare/sign/submit flow. It recovers eligible operator wallets, the project upload buffer, fixed-treasury fee claims and ProgramData rent only when retirement will not strand launched coins. Seven offline recovery checks pass. Transaction fees and user/pool funds are excluded.
+The user additionally required a backend recovery path before deployment. [operator-recovery.md](operator-recovery.md) documents the local prepare/sign/submit flow. It recovers eligible operator wallets, the project upload buffer, fixed-treasury fee claims and ProgramData rent only when retirement will not strand launched coins. Seven recovery contract tests and eight native-loader/System Program execution checks pass locally. Transaction fees and user/pool funds are excluded.
 
 ## Validation and release gates
 

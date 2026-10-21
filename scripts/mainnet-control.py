@@ -47,10 +47,13 @@ def deploy(c,args):
     tested=json.loads((ROOT/'research/mainnet-local-tests.json').read_text());assert tested['passed'] and tested['checks']>=42 and tested['program']==c['program'] and tested['binarySha256']==report['binary_sha256']
     recovery=subprocess.run(['node','--test','tests/recovery.test.mjs'],cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     assert recovery.returncode==0,'User-required operator recovery backend checks failed'
+    loader=json.loads((ROOT/'research/recovery-local-tests.json').read_text())
+    assert loader['passed'] and loader['checks']>=8 and loader['binarySha256']==report['binary_sha256'],'Native loader recovery evidence must match the candidate'
     operator=pathlib.Path(args.operator_dir).resolve();keys={'program':'program','deployer':'deployer','upgrade_authority':'upgrade-authority','treasury':'treasury','recovery':'recovery'}
     for role,name in keys.items():
         actual=subprocess.check_output([args.keygen,'pubkey',str(operator/(name+'.json'))],text=True).strip();assert actual==c[role],'Wrong '+role+' signer'
     buffer=operator/'deployment-buffer.json';assert buffer.is_file()
+    assert subprocess.check_output([args.keygen,'pubkey',str(buffer)],text=True).strip()==c['upload_buffer'],'Wrong deployment buffer signer'
     command=[args.solana,'program','deploy',str(ROOT/'target/mainnet/depump.so'),'--url',URL,'--keypair',str(operator/'deployer.json'),'--upgrade-authority',str(operator/'upgrade-authority.json'),'--program-id',str(operator/'program.json'),'--buffer',str(buffer),'--max-len',str(report['binary_bytes']),'--with-compute-unit-price','0','--max-sign-attempts','1','--use-rpc']
     result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     if result.returncode:

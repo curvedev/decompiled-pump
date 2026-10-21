@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-21T10:59:55.175Z",
+  "runtime": "LiteSVM local bank with native upgradeable loader and System Program",
+  "binarySha256": "24288be397ade5b5fddeb452b3749bd6f9401e019244ea1f0285db3d9c750530",
+  "passed": true,
+  "checks": 8,
+  "buffer_refund_verified": true,
+  "programdata_refund_verified": true,
+  "wallet_sweep_verified": true,
+  "mainnet_transactions_sent": 0,
+  "limits": [
+    "Simulated empty project; no launched coins",
+    "Does not test a browser wallet or mainnet network submission",
+    "ProgramData rent recovery is retirement, not liquidity recovery; the small Program account remains"
+  ]
+}
