@@ -2,7 +2,19 @@ import {Connection,PublicKey,Keypair,Transaction,VersionedTransaction,ComputeBud
 import {createAssociatedTokenAccountIdempotentInstruction,getAssociatedTokenAddressSync} from '@solana/spl-token';
 import {PROGRAM,RPC,pda,decodeCoin,createInstruction,writeInstruction,sealInstruction,tradeInstruction,freshCoin,tokensForBudget,quote,encoder,type Coin,type Metadata} from './protocol.ts';
 import {account,sign,confirmSigned} from './wallet.ts';
-export const connection=new Connection(RPC,{commitment:'confirmed',disableRetryOnRateLimit:true});
+const rpcFetch:typeof fetch=async(input,init)=>{
+  for(let attempt=0;;attempt++){
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12_000);
+    try{
+      const response=await fetch(input,{...init,signal:controller.signal});
+      if(response.status!==429||attempt===1)return response;
+      await response.arrayBuffer();
+    }catch(error){if(controller.signal.aborted)throw new Error('Devnet RPC timed out. Refresh to try again.');throw error;}
+    finally{clearTimeout(timer);}
+    await new Promise(resolve=>setTimeout(resolve,1500));
+  }
+};
+export const connection=new Connection(RPC,{commitment:'confirmed',disableRetryOnRateLimit:true,fetch:rpcFetch});
 export const localNetwork=/^http:\/\/(127\.0\.0\.1|localhost):/.test(RPC);
 const DEVNET_GENESIS='EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG';
 export const networkName=localNetwork?'Local validator':'Solana devnet';
@@ -82,14 +94,17 @@ export async function launch(data:Metadata,budget:bigint,update:Update,resume?:P
   localStorage.removeItem('depump.pending');update('Coin launched');return mint;
 }
 type HistoryPoint={time:number;price:number;side:string;signature:string};
-const tradeHistoryCache=new Map<string,{expires:number,promise:Promise<HistoryPoint[]>}>();
-export async function history(coin:Coin){
+type HistoryEntry={expires:number;loading:boolean;promise:Promise<HistoryPoint[]>};
+const tradeHistoryCache=new Map<string,HistoryEntry>();
+export async function history(coin:Coin,force=false){
   const key=coin.mint.toBase58(),cached=tradeHistoryCache.get(key);
-  if(cached&&cached.expires>Date.now())return cached.promise;
-  const promise=readHistory(coin).catch(error=>{tradeHistoryCache.delete(key);throw error;});
-  tradeHistoryCache.set(key,{expires:Date.now()+15_000,promise});
+  if(cached&&(cached.loading||(!force&&cached.expires>Date.now())))return cached.promise;
+  const entry={} as HistoryEntry;
+  entry.loading=true;entry.expires=Infinity;
+  entry.promise=readHistory(coin).then(points=>{entry.loading=false;entry.expires=Date.now()+60_000;return points;}).catch(error=>{if(tradeHistoryCache.get(key)===entry)tradeHistoryCache.delete(key);throw error;});
+  tradeHistoryCache.set(key,entry);
   if(tradeHistoryCache.size>100)tradeHistoryCache.delete(tradeHistoryCache.keys().next().value!);
-  return promise;
+  return entry.promise;
 }
 async function readHistory(coin:Coin){
   const signatures=await connection.getSignaturesForAddress(coin.address,{limit:30});

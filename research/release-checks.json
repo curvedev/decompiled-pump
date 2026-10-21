@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-21T09:11:09.917832+00:00",
+  "date": "2026-10-21T09:42:39.306341+00:00",
   "protocol_checks": 41,
   "protocol_checks_passed": true,
   "rust_tests": 6,
@@ -13,11 +13,13 @@
   "source_maps": "disabled",
   "public_source_push": "verified curvedev namespace, Anonymous author and committer",
   "devnet_deployment": "finalized exact executable byte match and expected upgrade authority verified",
-  "visual_browser_QA": "desktop explore/create/coin, live listing/history/quotes and no-wallet fallback verified; mobile viewport override ineffective",
+  "visual_browser_QA": "Pump.fun-style desktop views and 390-pixel iframe CSS layout checked; physical mobile devices and real extension-wallet approvals remain unverified",
   "privacy_staged_check": "rechecked before publication commit",
   "privacy_message_check": "rechecked before publication commit",
   "privacy_history_archive_check": "recorded after commit in the packaged release-manifest.json",
   "static_HTTP_asset": "200 response verified",
   "devnet_smoke": "passed: nine finalized transactions; 15 assertions in resumed final pass",
-  "public_site": "Pages build and exact public HTML verified"
+  "public_site": "Pages build and exact public HTML verified",
+  "frontend_interface": "compact navigation/search, grid/table/watchlist, stage feeds, create preview, chart metrics and trades table",
+  "font": "unmodified Geist 1.8.1; local serving with OFL notice and provenance"
 }

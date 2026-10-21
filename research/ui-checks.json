@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-21T09:46:26.146191+00:00",
+  "reference": "Pump.fun public Explore, create and coin interfaces inspected on 21 October 2026",
+  "desktop_viewport": {
+    "width": 1280,
+    "page_width": 1280
+  },
+  "responsive_css_check": {
+    "method": "Same-origin iframe in the in-app browser",
+    "width": 390,
+    "page_width": 390,
+    "views": [
+      "Explore",
+      "Create",
+      "Trading"
+    ],
+    "horizontal_overflow": false
+  },
+  "manual_browser_checks_passed": [
+    "Real devnet coin grid and table views",
+    "Watchlist add, persistence through reload/navigation, removal and empty state",
+    "Home groups the existing graduated TEST coin into the correct stage",
+    "On-curve and graduated filters",
+    "Search empty state and restoration of real results",
+    "Pasted mint opens the dedicated coin page",
+    "Collapsible navigation expands to 212 pixels and collapses",
+    "Create form updates name, ticker and description preview",
+    "Image chooser converts a local PNG fixture to an 887-character WebP data URL",
+    "Create action opens no-wallet chooser while retaining form content",
+    "Price and inferred market-cap chart controls",
+    "Trades and About tabs show on-chain fills and metadata",
+    "Buy and sell quote controls; tiny nonzero fees displayed to nine decimal places",
+    "History-unavailable state shown when the free public RPC rate-limits the request",
+    "Bundled Geist font renders locally"
+  ],
+  "client_wallet_contract_tests": 8,
+  "typescript_build": "passed",
+  "program_source_changed": false,
+  "protocol_encoding_or_wallet_signing_changed": false,
+  "on_chain_transactions_sent_during_UI_check": 0,
+  "limitations": [
+    "Actual extension-wallet approval not exercised",
+    "Physical Safari/Android devices not tested",
+    "Not full Pump.fun feature or data parity",
+    "Free public RPC history can be temporarily unavailable; no sample market activity is substituted"
+  ]
+}

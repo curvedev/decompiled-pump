@@ -12,7 +12,7 @@
 | Protocol validation | 37 initial localhost validator checks; 41 checks against corrected/remapped artifact in LiteSVM, including authorized platform claim |
 | Arithmetic/client | Six Rust tests (10,000 randomized cases in one test); eight client/wallet-adapter tests; TypeScript and static build pass |
 | Wallet approval validation | Adapter contracts tested with ephemeral mock wallets; actual browser-extension approval flows not verified |
-| Browser/layout QA | Desktop explore/create/coin views, live on-chain listing/history/quotes and no-wallet fallback verified; mobile override did not change the actual viewport, so mobile rendering remains unverified |
+| Browser/layout QA | Pump.fun-style desktop Explore/create/coin layouts, grid/table/watchlist, search, preview/image conversion, chart metrics and quotes checked; 390-pixel CSS layout checked in an iframe; physical mobile devices and actual wallet approvals remain unverified |
 | Devnet funding/deployment | Official faucet supplied 2.5 free test SOL; finalized program bytes and upgrade authority verified; TEST coin completed nine finalized lifecycle transactions including claims, graduation and pool swaps |
 | Public website | GitHub Pages build succeeded; public HTML matches the prepared build and the browser reads real devnet accounts |
 | Mainnet | Not approved, not deployed, no real SOL spent |
