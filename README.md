@@ -26,7 +26,7 @@ npm run dev
 
 The default frontend RPC is the free public Solana devnet endpoint. It checks devnet's genesis hash before signing. For a **local-only** preview, set `VITE_RPC_URL=http://127.0.0.1:8899`. Never publish a frontend build configured for a local validator.
 
-The default esbuild build generates `dist/`, with relative asset URLs and source maps disabled. `scripts/package-pages.py` copies the build into `docs/` for GitHub Pages while preserving protocol documentation. No server, database, account login, paid RPC, or upload service is required. Coin thumbnails and metadata are stored on-chain; the browser downsizes and re-encodes images before signing. `npm run dev` builds and serves on loopback port 5187; rebuild and refresh after editing.
+The default esbuild build generates `dist/`, with content-versioned relative asset URLs and source maps disabled. `scripts/package-pages.py` copies the build into `docs/` for GitHub Pages while preserving protocol documentation. No server, database, account login, paid RPC, or upload service is required. Coin thumbnails and metadata are stored on-chain; the browser downsizes and re-encodes images before signing. `npm run dev` builds and serves on loopback port 5187; rebuild and refresh after editing.
 
 ## Local transaction verification
 
