@@ -75,7 +75,7 @@ export async function sendAction(ixs:TransactionInstruction[],update:Update){
   const signature=await confirmSigned(connection,signed,block.lastValidBlockHeight,s=>update('Confirming transaction…',s));
   tradeHistoryCache.clear();update('Confirmed',signature);return signature;
 }
-function readable(logs:string[]|null|undefined){return(logs||[]).filter(l=>/error|failed|insufficient/i.test(l)).slice(-2).join(' ').slice(0,400)||'No funds were moved.';}
+function readable(logs:string[]|null|undefined){return(logs||[]).filter(l=>/error|failed|insufficient/i.test(l)).slice(-2).join(' ').slice(0,400)||'The current transaction could not be simulated.';}
 export type Pending={mint:string;creator:string;metadata:Metadata;budget:string};
 export function pending():Pending|null{try{return JSON.parse(localStorage.getItem(storageKey('pending'))||'null');}catch{return null;}}
 export async function launch(data:Metadata,budget:bigint,update:Update,resume?:Pending){
@@ -87,22 +87,34 @@ export async function launch(data:Metadata,budget:bigint,update:Update,resume?:P
   if(bytes.length>4096)throw new Error('The image and description are too large. Use a smaller image or shorter description.');
   const hash=new Uint8Array(await crypto.subtle.digest('SHA-256',Uint8Array.from(bytes)));
   const existing=await connection.getAccountInfo(pda('coin',mint));
-  if(existing){const value=decodeCoin(pda('coin',mint),existing.data);if(value.sealed){localStorage.removeItem(storageKey('pending'));return mint;}if(!value.creator.equals(user))throw new Error('Launch belongs to a different creator');}
+  if(existing){
+    if(!existing.owner.equals(PROGRAM))throw new Error('Invalid launch account');
+    const value=decodeCoin(pda('coin',mint),existing.data);
+    if(!value.creator.equals(user))throw new Error('Launch belongs to a different creator');
+    if(value.sealed){localStorage.removeItem(storageKey('pending'));return mint;}
+    if(value.metadataLen!==bytes.length||!value.metadataHash.every((b,i)=>b===hash[i]))throw new Error('Saved metadata does not match this launch');
+  }
   if(resume&&!existing)throw new Error('No partial launch exists. Start a new launch.');
-  const block=await connection.getLatestBlockhash('confirmed');
-  const txs:Transaction[]=[];
-  function append(ixs:TransactionInstruction[]){const tx=new Transaction({feePayer:user,...block}).add(ComputeBudgetProgram.setComputeUnitLimit({units:300_000}),...ixs);if(tx.serialize({requireAllSignatures:false,verifySignatures:false}).length>1232)throw new Error('Transaction exceeds network size');txs.push(tx);return tx;}
-  if(!existing){const tx=append([createInstruction(user,mint,bytes,hash)]);tx.partialSign(keypair!);}
-  for(let offset=0;offset<bytes.length;offset+=600)append([writeInstruction(user,mint,offset,bytes.slice(offset,offset+600))]);
+  const steps:TransactionInstruction[][]=[];
+  if(!existing)steps.push([createInstruction(user,mint,bytes,hash)]);
+  for(let offset=0;offset<bytes.length;offset+=600)steps.push([writeInstruction(user,mint,offset,bytes.slice(offset,offset+600))]);
   const final=[sealInstruction(user,mint)];
   if(budget>0n){const coin=freshCoin(mint,user),amount=tokensForBudget(coin,budget);if(amount===0n)throw new Error('Initial buy is too small');const ata=getAssociatedTokenAddressSync(mint,user);final.push(createAssociatedTokenAccountIdempotentInstruction(user,ata,user,mint),tradeInstruction(user,coin,amount,budget,true));}
-  append(final);
-  update('Checking launch…');
-  const sim=await connection.simulateTransaction(new VersionedTransaction(txs[0].compileMessage()),{sigVerify:false});
-  if(sim.value.err)throw new Error('Launch simulation failed. '+readable(sim.value.logs));
-  update('Approve launch in your wallet');const signed=await sign(txs);
+  steps.push(final);
+  // Save recovery information before broadcasting any transaction. No secret key is stored.
   localStorage.setItem(storageKey('pending'),JSON.stringify({mint:mint.toBase58(),creator:user.toBase58(),metadata:data,budget:budget.toString()}));
-  for(let i=0;i<signed.length;i++)await confirmSigned(connection,signed[i],block.lastValidBlockHeight,s=>update(`Confirming launch ${i+1} of ${signed.length}…`,s));
+  for(let i=0;i<steps.length;i++){
+    if(!account||!user.equals(new PublicKey(account.publicKey)))throw new Error('Reconnect the wallet that started this launch, then resume');
+    // Each approval gets a fresh blockhash after the preceding transaction confirms.
+    const{tx,block}=await prepared(steps[i]);
+    if(!existing&&i===0)tx.partialSign(keypair!);
+    update(`Checking launch ${i+1} of ${steps.length}…`);
+    const sim=await connection.simulateTransaction(new VersionedTransaction(tx.compileMessage()),{sigVerify:false});
+    if(sim.value.err)throw new Error('Launch simulation failed. '+readable(sim.value.logs));
+    update(`Approve launch ${i+1} of ${steps.length} in your wallet`);
+    const[signed]=await sign([tx]);
+    await confirmSigned(connection,signed,block.lastValidBlockHeight,s=>update(`Confirming launch ${i+1} of ${steps.length}…`,s));
+  }
   localStorage.removeItem(storageKey('pending'));update('Coin launched');return mint;
 }
 type HistoryPoint={time:number;price:number;side:string;signature:string};

@@ -40,6 +40,9 @@ export async function sign(transactions:Transaction[]):Promise<Transaction[]>{
     return tx;
   });
 }
+export class ConfirmationError extends Error{
+  constructor(readonly signature:string,message:string){super(message);this.name='ConfirmationError';}
+}
 export async function confirmSigned(c:Connection,tx:Transaction,lastValidBlockHeight:number,onSignature:(s:string)=>void){
   const signature=base58(tx.signature!);onSignature(signature);
   const bytes=tx.serialize();
@@ -53,11 +56,14 @@ export async function confirmSigned(c:Connection,tx:Transaction,lastValidBlockHe
       return signature;
     }catch(e){
       error=e;
-      const status=(await c.getSignatureStatuses([signature])).value[0];
+      let status;
+      try{status=(await c.getSignatureStatuses([signature],{searchTransactionHistory:true})).value[0];}
+      catch{throw new ConfirmationError(signature,'Confirmation is uncertain. Check this transaction before trying again.');}
       if(status?.err)throw new Error('Transaction failed: '+JSON.stringify(status.err));
       if(status?.confirmationStatus==='confirmed'||status?.confirmationStatus==='finalized')return signature;
-      if(await c.getBlockHeight('confirmed')>lastValidBlockHeight)break;
+      try{if(await c.getBlockHeight('confirmed')>lastValidBlockHeight)break;}
+      catch{throw new ConfirmationError(signature,'Confirmation is uncertain. Check this transaction before trying again.');}
     }
   }
-  throw new Error('Confirmation is uncertain. Check the transaction status before retrying. '+(error instanceof Error?error.message:''));
+  throw new ConfirmationError(signature,'Confirmation is uncertain. Check the transaction status before retrying. '+(error instanceof Error?error.message:''));
 }

@@ -2,7 +2,7 @@ import {CONFIG} from '../web/network.ts';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {Keypair,PublicKey,SystemProgram,Transaction} from '@solana/web3.js';
-import {connect,disconnect,sign,confirmSigned} from '../web/wallet.ts';
+import {connect,disconnect,sign,confirmSigned,ConfirmationError} from '../web/wallet.ts';
 function mockWallet(key:Keypair,alter=false){
  const account={address:key.publicKey.toBase58(),publicKey:key.publicKey.toBytes(),chains:[CONFIG.chain]};
  return{features:{'standard:connect':{connect:async()=>({accounts:[account]})},'solana:signTransaction':{
@@ -31,4 +31,12 @@ test('failed broadcasts have a bounded retry count',async()=>{
  const key=Keypair.generate(),tx=transaction(key);tx.sign(key);let sends=0;
  const c:any={sendRawTransaction:async()=>{sends++;throw new Error('unavailable');},getSignatureStatuses:async()=>({value:[null]}),getBlockHeight:async()=>1};
  await assert.rejects(confirmSigned(c,tx,100,()=>{}),/Confirmation is uncertain/);assert.equal(sends,3);
+});
+
+test('failed confirmation RPC reads retain the exact explorer signature',async()=>{
+ for(const failure of ['status','height']){
+  const key=Keypair.generate(),tx=transaction(key);tx.sign(key);let sends=0;
+  const c:any={sendRawTransaction:async()=>{sends++;throw new Error('response lost');},getSignatureStatuses:async()=>{if(failure==='status')throw new Error('RPC unavailable');return{value:[null]};},getBlockHeight:async()=>{throw new Error('RPC unavailable');}};
+  await assert.rejects(confirmSigned(c,tx,100,()=>{}),(error:unknown)=>error instanceof ConfirmationError&&error.signature.length>20&&/uncertain/.test(error.message));assert.equal(sends,1);
+ }
 });

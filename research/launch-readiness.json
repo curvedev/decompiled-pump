@@ -1,0 +1,17 @@
+{
+  "date_utc": "2026-10-24T13:29:32.239661+00:00",
+  "network": "mainnet-beta",
+  "mainnet_transactions_sent": 0,
+  "program_binary_unchanged": true,
+  "binary_sha256": "24288be397ade5b5fddeb452b3749bd6f9401e019244ea1f0285db3d9c750530",
+  "client_tests_per_network": 18,
+  "native_client_interrupted_launch_resume_and_no_duplicate_buy": true,
+  "rust_mainnet_tests": 6,
+  "local_protocol_rerun_without_treasury_key": 38,
+  "recovery_contract_tests": 7,
+  "native_recovery_checks": 8,
+  "real_extension_wallet_approvals_verified": false,
+  "encrypted_operator_backup_restore_verified": false,
+  "independent_security_review_completed": false,
+  "project_token_created": false
+}

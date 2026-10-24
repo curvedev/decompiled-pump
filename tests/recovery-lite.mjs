@@ -58,12 +58,16 @@ send(await validateRecovery(rpc,c,retire),[keys.deployer,keys.upgrade_authority]
 check(balance(pd)===0n,'ProgramData rent closed');
 check(balance(keys.recovery.publicKey)-beforeRetire===BigInt(state.lamports),'exact ProgramData rent refunded');
 // Closing ProgramData can leave the small executable Program account in place.
-// Verify the runtime can no longer invoke its code after the next bank slot.
-svm.warpToSlot(102n);svm.expireBlockhash();
-const invoke=new Transaction({feePayer:keys.deployer.publicKey,recentBlockhash:svm.latestBlockhash()}).add(new TransactionInstruction({programId:keys.program.publicKey,keys:[],data:Buffer.from([255])}));
+// warpToSlot changes the clock, not LiteSVM's warm program cache. Reconstruct
+// a fresh bank from the actual remaining accounts to test loader resolution.
+const cold=new LiteSVM();cold.warpToSlot(102n);
+for(const address of [keys.program.publicKey,pd,keys.deployer.publicKey]){
+ const account=svm.getAccount(address);if(account&&account.lamports>0)cold.setAccount(address,account);
+}
+const invoke=new Transaction({feePayer:keys.deployer.publicKey,recentBlockhash:cold.latestBlockhash()}).add(new TransactionInstruction({programId:keys.program.publicKey,keys:[],data:Buffer.from([255])}));
 invoke.sign(keys.deployer);
-const retiredResult=svm.sendTransaction(invoke);
-check(retiredResult instanceof FailedTransactionMetadata&&String(retiredResult.err()).includes('UnsupportedProgramId')&&retiredResult.meta().logs().includes('Program is not deployed'),'retired program cannot execute');
+const retiredResult=cold.sendTransaction(invoke);
+check(retiredResult instanceof FailedTransactionMetadata&&String(retiredResult.err()).includes('UnsupportedProgramId')&&retiredResult.meta().logs().includes('Program is not deployed'),'retired program cannot execute in a fresh bank');
 
 svm.expireBlockhash();
 const beforeSweep=balance(keys.recovery.publicKey),sourceBefore=balance(keys.treasury.publicKey);
@@ -72,6 +76,6 @@ send(await validateRecovery(rpc,c,sweep),[keys.treasury]);
 check(balance(keys.treasury.publicKey)===0n,'role wallet swept after fee');
 check(balance(keys.recovery.publicKey)-beforeSweep===sourceBefore-BigInt(sweep.feeLamports),'exact wallet amount recovered');
 
-const result={date:new Date().toISOString(),runtime:'LiteSVM local bank with native upgradeable loader and System Program',binarySha256:createHash('sha256').update(binary).digest('hex'),passed:true,checks,buffer_refund_verified:true,programdata_refund_verified:true,wallet_sweep_verified:true,mainnet_transactions_sent:0,limits:['Simulated empty project; no launched coins','Does not test a browser wallet or mainnet network submission','ProgramData rent recovery is retirement, not liquidity recovery; the small Program account remains']};
+const result={date:new Date().toISOString(),runtime:'LiteSVM local bank with native upgradeable loader and System Program',binarySha256:createHash('sha256').update(binary).digest('hex'),passed:true,checks,buffer_refund_verified:true,programdata_refund_verified:true,wallet_sweep_verified:true,mainnet_transactions_sent:0,limits:['Simulated empty project; no launched coins','Post-retirement invocation uses a fresh bank; warm-cache invalidation is not modeled','Does not test a browser wallet or mainnet network submission','ProgramData rent recovery is retirement, not liquidity recovery; the small Program account remains']};
 writeFileSync('research/recovery-local-tests.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result));

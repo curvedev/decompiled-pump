@@ -5,7 +5,7 @@ An independent experimental Solana launchpad and a public record of deployed-pro
 ## Current status
 
 - Native Rust program builds to sBPF. Coin creation, curve buys/sells, separate fee claims, explicit graduation, and independent post-graduation swaps are implemented.
-- Six Rust tests, including 10,000 randomized arithmetic cases; sixteen client/wallet/network/discovery tests in each network mode; 42 protocol checks against the mainnet artifact in LiteSVM. Seven recovery contract tests, eight native recovery checks and eight native upload checks pass. Updated verification results are recorded in `research/`.
+- Six Rust tests, including 10,000 randomized arithmetic cases; eighteen client/wallet/network/discovery tests in each network mode; 42 protocol checks against the mainnet artifact in LiteSVM. Seven recovery contract tests, eight native recovery checks and eight native upload checks pass. The actual client also passes a native interrupted-launch/resume regression. Updated verification results are recorded in `research/`.
 - Pump, PumpSwap, and Pump Fees executables were captured and hashed. The Pump executable was disassembled with Anza's sBPF tool. Four buys and four sells ran against that captured executable in LiteSVM, with fee observations and failed-slippage rollback checks.
 - [Public mainnet launchpad](https://depump.fun/) uses the finalized, byte-verified mainnet program and separately held operator roles. No mainnet coin was launched during deployment. The prior devnet TEST coin completed nine finalized lifecycle transactions. See [mainnet verification](research/mainnet-deployment.json), [status](docs/status.md), and the separate [devnet results](research/devnet-smoke-results.json).
 - User-selected Reverse Engineered Pump interface: classic board, bracket navigation with GitHub links, coin search, watchlist, live create preview, and chart/trade panels. Desktop and 390-pixel CSS layouts were browser-checked; actual extension-wallet approvals and physical mobile devices remain unverified. See [interface recreation](docs/interface.md).
@@ -74,3 +74,5 @@ MIT covers this repository's original implementation. Third-party dependencies r
 ## Mainnet release
 
 The finalized mainnet program, separate public wallet roles, exact executable hash, actual costs, local recovery backend and limitations are recorded in [docs/mainnet.md](docs/mainnet.md). The program remains upgradeable and has not received an independent audit. No project token or verification coin was launched.
+
+Current release checks and the remaining wallet/custody handoff are in [launch readiness](docs/launch-readiness.md).

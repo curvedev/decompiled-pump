@@ -1,6 +1,6 @@
 # Security and readiness limits
 
-This is experimental devnet software, not a completed audit or a mainnet launch recommendation. The user has requested mainnet preparation; the specific 1.35 SOL cap and separate wallet roles have been approved, conditional on the tested local recovery backend. Mainnet deployment remains pending funding. No project-token launch is authorized.
+This is experimental mainnet software, not a completed independent audit. The mainnet program was deployed on 21 October 2026 within the approved 1.35 SOL cap, with separate operator roles and a tested local recovery backend. The public site is https://depump.fun/. Exact deployment bytes and upgrade authority were reverified on 24 October 2026. No project-token launch is authorized.
 
 Validated locally: fixed supply and absent freeze authority; metadata commitment/sealing and creator authorization; buy/sell slippage failure and rollback; wrong vault and signer rejection; separate fee liabilities; unauthorized claim rejection; duplicate claim rejection; graduation gating/idempotency; pool swaps; token/SOL conservation and pool-product behavior in the tested paths. Unit tests exercise arithmetic edges and 10,000 deterministic randomized curve round trips. Results have finite scope.
 
@@ -8,7 +8,7 @@ Unresolved: extension-wallet/browser end-to-end approvals, adversarial multi-tra
 
 The current program deliberately has no metadata close, mint recovery, liquidity withdrawal, emergency reserve withdrawal, pause, or mutable-fee instruction. Failed/abandoned creation rent can remain locked. A pool's founding liquidity and user deposits cannot be reclaimed by an operator through v0.1. SPL token holders can manage their own token accounts under SPL rules. The upgrade authority remains capable of replacing program behavior; it must be reviewed before mainnet, and code immutability claims must reflect actual chain state.
 
-Before mainnet: review the complete deployed artifact and authority roles, recheck invariants with a broader independent review, complete wallet tests and devnet operations, choose production reserve/fee parameters, reprice rent and transaction fees, approve actual costs, and document governance/recovery. The current devnet role keys are not implicitly approved for mainnet.
+Before a wider public launch: complete real extension-wallet approvals and private encrypted key custody, and resolve broader independent security and concurrency review. Mainnet parameters and separate roles are recorded in docs/mainnet.md; devnet keys must not be reused as mainnet roles. See docs/launch-readiness.md for the current evidence and open handoff.
 
 Do not commit credentials, keypairs, signed operator state, machine paths, or provider IDs. Runtime test signers are generated outside shared source. The public research excludes third-party raw binaries and copied source/IDL files pending redistribution review.
 

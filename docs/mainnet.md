@@ -39,7 +39,7 @@ The user additionally required a backend recovery path before deployment. [opera
 
 ## Validation and release gates
 
-The exact mainnet candidate passed 42 local protocol checks, including separate treasury claims, initial reserve agreement, slippage rollback, conservation, graduation and pool swaps. Six Rust tests passed, including 10,000 arithmetic round trips. Sixteen client/wallet/network/discovery tests pass in both network modes. Real extension-wallet approvals, physical devices, broad adversarial concurrency and independent security review remain unverified; this is not an audited release.
+The exact mainnet candidate passed 42 local protocol checks, including separate treasury claims, initial reserve agreement, slippage rollback, conservation, graduation and pool swaps. Six Rust tests passed, including 10,000 arithmetic round trips. Eighteen client/wallet/network/discovery tests pass in both network modes. Real extension-wallet approvals, physical devices, broad adversarial concurrency and independent security review remain unverified; this is not an audited release.
 
 `python3 scripts/build-program.py --network mainnet` builds a separate artifact in `target/mainnet`. `DEPUMP_NETWORK=mainnet npm run build` builds a mainnet-labeled frontend. Wallet chain identifiers, genesis hash, program, treasury, pending launch storage, watchlists and explorer links are network-specific.
 

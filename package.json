@@ -14,7 +14,8 @@
     "test:chain:lite": "CHAIN_RUNTIME=lite node --import tsx tests/chain.ts",
     "test:recovery": "node --test tests/recovery.test.mjs",
     "test:recovery:lite": "node tests/recovery-lite.mjs",
-    "test:upload:lite": "node tests/upload-lite.mjs"
+    "test:upload:lite": "node tests/upload-lite.mjs",
+    "test:launch:lite": "node --import tsx --test tests/launch.native.ts"
   },
   "dependencies": {
     "@solana/web3.js": "1.98.4",

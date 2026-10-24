@@ -28,18 +28,27 @@ export class LaunchDiscovery{
  constructor(private program:PublicKey){}
  async scan(connection:DiscoveryRPC,older=false){
   if(older&&!this.hasOlder)return;
-  const signatures=await connection.getSignaturesForAddress(this.program,{limit:20,...(older&&this.before?{before:this.before}:{})},'confirmed');
-  const unread=signatures.filter(s=>!s.err&&!this.seen.has(s.signature));
-  const found=new Set<string>();
-  for(let i=0;i<unread.length;i+=1){
-   const batch=unread.slice(i,i+1),transactions=await connection.getParsedTransactions(batch.map(s=>s.signature),{commitment:'confirmed',maxSupportedTransactionVersion:0});
-   if(transactions.length!==batch.length||transactions.some(tx=>!tx?.meta))throw new Error('Launch history is incomplete. Refresh to retry.');
-   for(const tx of transactions)for(const mint of createdMints(tx,this.program))found.add(mint);
-   if(i+1<unread.length)await new Promise(resolve=>setTimeout(resolve,200));
-  }
-  // Advance only after every requested transaction is available.
+  let cursor=older?this.before:undefined;
+  let tail:Awaited<ReturnType<DiscoveryRPC['getSignaturesForAddress']>>=[];
+  const found=new Set<string>(),observed=new Set<string>();
+  do{
+   const signatures=await connection.getSignaturesForAddress(this.program,{limit:20,...(cursor?{before:cursor}:{})},'confirmed');
+   const overlap=signatures.some(s=>this.seen.has(s.signature));
+   const unread=signatures.filter(s=>!s.err&&!this.seen.has(s.signature));
+   for(let i=0;i<unread.length;i++){
+    const transactions=await connection.getParsedTransactions([unread[i].signature],{commitment:'confirmed',maxSupportedTransactionVersion:0});
+    if(transactions.length!==1||!transactions[0]?.meta)throw new Error('Launch history is incomplete. Refresh to retry.');
+    for(const mint of createdMints(transactions[0],this.program))found.add(mint);
+    if(i+1<unread.length)await new Promise(resolve=>setTimeout(resolve,200));
+   }
+   for(const entry of signatures)observed.add(entry.signature);
+   tail=signatures;cursor=signatures.at(-1)?.signature;
+   // Refresh through any new pages until the previously observed head is reached.
+   if(older||!this.seen.size||overlap||signatures.length<20)break;
+  }while(cursor);
+  // Commit only after every requested transaction is available. Refresh preserves the older cursor.
+  if(older||!this.seen.size){this.before=tail.at(-1)?.signature;this.hasOlder=tail.length===20;}
   for(const mint of found)this.mints.add(mint);
-  for(const entry of signatures)this.seen.add(entry.signature);
-  this.before=signatures.at(-1)?.signature;this.hasOlder=signatures.length===20;
+  for(const signature of observed)this.seen.add(signature);
  }
 }

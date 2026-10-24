@@ -1,4 +1,4 @@
-# Readiness record — 21 October 2026
+# Readiness record — 24 October 2026
 
 | Area | Verified state |
 | --- | --- |
@@ -10,7 +10,7 @@
 | Original runtime tests | Four buys, four sells, four failed-slippage rollback cases executed in LiteSVM against pinned Pump bytes |
 | Independent program | sBPF build passes; own System/SPL-only execution path for creation, trades, claims, graduation and pool swaps |
 | Protocol validation | 37 initial localhost validator checks; 41 checks against corrected/remapped artifact in LiteSVM, including authorized platform claim |
-| Arithmetic/client | Six Rust tests (10,000 randomized cases in one test); sixteen client/wallet/network/discovery tests in each network mode; TypeScript and static build pass |
+| Arithmetic/client | Six Rust tests (10,000 randomized cases in one test); eighteen client/wallet/network/discovery tests in each network mode; TypeScript and static build pass |
 | Wallet approval validation | Adapter contracts tested with ephemeral mock wallets; actual browser-extension approval flows not verified |
 | Browser/layout QA | User-selected Reverse Engineered Pump board/create/coin/source layouts, watchlist, search, preview/image conversion, chart metrics and quotes checked; 390-pixel CSS layout checked in an iframe; physical mobile devices and actual wallet approvals remain unverified |
 | Devnet funding/deployment | Official faucet supplied 2.5 free test SOL; finalized program bytes and upgrade authority verified; TEST coin completed nine finalized lifecycle transactions including claims, graduation and pool swaps |
@@ -22,3 +22,5 @@ Public mainnet site: https://depump.fun/. Mainnet verification and costs are in 
 The published mainnet program remains upgradeable by its separate mainnet authority. This is experimental mainnet operation, with no audited or production-readiness claim.
 
 The complete Git index, commit identity/message, proposed history, generated site files and release archive pass explicit local privacy checks before sharing. Results are recorded in `research/release-checks.json` and the packaged release manifest. Operator keypairs, third-party raw captures and ignored hosting state are excluded.
+
+The 24 October client release uses a fresh blockhash and simulation for each launch approval, preserves interrupted-launch recovery, retains explorer links after uncertain confirmation, and preserves older-listing pagination across refreshes. A native test executes the actual client against the exact mainnet artifact, including interruption, resume and a sealed-launch duplicate-buy check. See [launch readiness](launch-readiness.md).

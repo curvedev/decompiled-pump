@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-21T13:57:13.392176+00:00",
+  "date": "2026-10-24T13:32:46.167843+00:00",
   "network": "mainnet-beta",
   "genesis": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
   "program": "4SBqwENU4drhkJY32ZjpZTtXvhRydVffaxfA3CPR4qgH",
   "programdata": "6uSSracdka2aViBsDNiTBweVhtMZHJc5qjcYj5CriGrL",
   "deployment_slot": 459649558,
-  "finalized_context_slot": 459653907,
+  "finalized_context_slot": 460868532,
   "upgrade_authority": "4pxnJyWVAirN6S7Bkw1c1nNAGQ7nmfsgqzPNSnp8g6Ry",
   "treasury": "Gj5G8VAQ35gNyDhB3t39frQ95oeR3UjFsgn2rbpct5uU",
   "binary_bytes": 125432,

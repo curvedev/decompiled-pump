@@ -30,3 +30,18 @@ test('failed signatures are skipped and exhausted history performs no older-page
  const discovery=new LaunchDiscovery(program);let reads=0;const rpc={getSignaturesForAddress:async()=>{reads++;return[{signature:'failed',err:{InstructionError:[0,'InvalidArgument']}}];},getParsedTransactions:async()=>{throw new Error('Failed signatures must not be fetched');}}as any;
  await discovery.scan(rpc);await discovery.scan(rpc,true);assert.equal(discovery.mints.size,0);assert.equal(reads,1);
 });
+
+test('refresh preserves the oldest pagination cursor and catches up across a busy head',async()=>{
+ const discovery=new LaunchDiscovery(program),queries:any[]=[];let phase='initial';
+ const page=(prefix:string)=>Array.from({length:20},(_,i)=>({signature:prefix+i,err:null}));
+ const rpc={getSignaturesForAddress:async(_p:PublicKey,options:any)=>{
+  queries.push({...options});
+  if(phase==='initial')return page('first');
+  if(phase==='older')return page('older');
+  if(phase==='refresh')return options.before==='new19'?[{signature:'gap',err:null},{signature:'first0',err:null}]:page('new');
+  return[];
+ },getParsedTransactions:async(signatures:string[])=>signatures.map(s=>txFor(s==='gap'?other:mint))}as any;
+ await discovery.scan(rpc);phase='older';await discovery.scan(rpc,true);
+ phase='refresh';await discovery.scan(rpc);assert(discovery.mints.has(other.toBase58()));assert.equal(discovery.hasOlder,true);
+ phase='end';await discovery.scan(rpc,true);assert.equal(queries.at(-1).before,'older19');assert.equal(discovery.hasOlder,false);
+});
