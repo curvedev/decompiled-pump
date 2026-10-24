@@ -6,10 +6,11 @@ import {PROGRAM,REAL_TOKEN,SUPPLY,INITIAL_TOKEN,INITIAL_SOL,units,quote,tokensFo
 import {connection,networkName,listings,moreListings,metadata,readCoin,sendAction,launch,pending,history,type Update} from './client.ts';
 import * as wallet from './wallet.ts';
 import './style.css';
+import logoUrl from './assets/depump-logo.png';
 import sourceContent from './source-content.generated.json';
 (globalThis as any).Buffer=Buffer;
 const app=document.querySelector<HTMLDivElement>('#app')!;
-const icon='<svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 25V7h9c10 0 10 18 0 18H6Z" stroke="currentColor" stroke-width="3"/><path d="m12 13-4 3 4 3m8-6 4 3-4 3" stroke="currentColor" stroke-width="2"/></svg>';
+const icon=`<img class="depump-logo" src="${new URL(logoUrl,import.meta.url).href}" alt="" width="48" height="48" decoding="async">`;
 const esc=(s:unknown)=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]!));
 const short=(s:string)=>s.slice(0,4)+'…'+s.slice(-4);
 const fmt=(n:number,d=3)=>new Intl.NumberFormat('en',{maximumFractionDigits:d,notation:n>1e6?'compact':'standard'}).format(n);

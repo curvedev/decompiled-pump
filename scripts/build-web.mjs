@@ -1,6 +1,6 @@
 import {execFileSync} from 'node:child_process';
 import {createRequire} from 'node:module';
-import {mkdirSync,readFileSync,writeFileSync,rmSync,renameSync,copyFileSync} from 'node:fs';
+import {mkdirSync,readFileSync,writeFileSync,rmSync,renameSync,copyFileSync,readdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const require=createRequire(import.meta.url);
 const network=process.env.DEPUMP_NETWORK||'devnet';
@@ -11,13 +11,15 @@ const sourceFiles=['programs/depump/src/lib.rs','programs/depump/src/math.rs','p
 writeFileSync('web/source-content.generated.json',JSON.stringify(Object.fromEntries(sourceFiles.map(path=>[path,readFileSync(path,'utf8')]))));
 const binary=require.resolve(`@esbuild/${process.platform}-${process.arch}/bin/esbuild`);
 rmSync('dist',{recursive:true,force:true});mkdirSync('dist/assets',{recursive:true});
-execFileSync(binary,['web/main.ts','--bundle','--format=esm','--platform=browser','--target=es2022','--minify','--legal-comments=eof','--loader:.woff2=file','--outfile=dist/assets/main.js','--define:import.meta.env='+JSON.stringify({VITE_RPC_URL:rpc,DEPUMP_NETWORK:network})],{stdio:'inherit'});
+execFileSync(binary,['web/main.ts','--bundle','--format=esm','--platform=browser','--target=es2022','--minify','--legal-comments=eof','--loader:.woff2=file','--loader:.png=file','--outfile=dist/assets/main.js','--define:import.meta.env='+JSON.stringify({VITE_RPC_URL:rpc,DEPUMP_NETWORK:network})],{stdio:'inherit'});
 const versioned={};
 for(const ext of ['js','css']){
   const file=`dist/assets/main.${ext}`,hash=createHash('sha256').update(readFileSync(file)).digest('hex').slice(0,12);
   versioned[ext]=`main.${hash}.${ext}`;renameSync(file,`dist/assets/${versioned[ext]}`);
 }
-let html=readFileSync('index.html','utf8').replace('/web/main.ts',`./assets/${versioned.js}`).replace('</head>',`<link rel="stylesheet" href="./assets/${versioned.css}"></head>`);
+const logoAsset=readdirSync('dist/assets').find(name=>/^depump-logo-.*\.png$/.test(name));
+if(!logoAsset)throw new Error('Official logo asset is missing from the build');
+let html=readFileSync('index.html','utf8').replaceAll('/web/assets/depump-logo.png',`/assets/${logoAsset}`).replaceAll('href="/assets/','href="./assets/').replace('/web/main.ts',`./assets/${versioned.js}`).replace('</head>',`<link rel="stylesheet" href="./assets/${versioned.css}"></head>`);
 writeFileSync('dist/network.json',JSON.stringify({network,rpc}));
 writeFileSync('dist/index.html',html);writeFileSync('dist/.nojekyll','');copyFileSync('web/fonts/OFL.txt','dist/assets/Geist-OFL.txt');
 console.log('Static frontend built without source maps.');
