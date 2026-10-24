@@ -23,6 +23,8 @@ test('native client launch refreshes approvals, resumes interrupted metadata, an
  patch('getGenesisHash',async()=>CONFIG.genesis);
  patch('getAccountInfo',async(address:PublicKey)=>{const a=svm.getAccount(address);return a?{...a,data:Buffer.from(a.data)}:null;});
  patch('getLatestBlockhash',async()=>({blockhash:svm.latestBlockhash(),lastValidBlockHeight:height+150}));
+ patch('getSignatureStatuses',async()=>{throw new Error('Local bank confirmation failed; network fallback is disabled');});
+ patch('getBlockHeight',async()=>height);
  patch('simulateTransaction',async(tx:VersionedTransaction)=>{
   svm.withSigverify(false);
   const result=svm.simulateTransaction(tx);svm.withSigverify(true);
